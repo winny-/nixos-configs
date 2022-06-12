@@ -7,18 +7,11 @@
 {
   imports =
     [
+      ./base.nix
       ./fonts.nix
-      ../package-overrides
+      ./docker.nix
+      ./libvirtd.nix
     ];
-
-  nixpkgs.config.allowUnfree = true;
-  
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "dvorak";
-  };
 
   services.xserver = {
     enable = true;
@@ -83,9 +76,6 @@
       '';
   };
   
-  # Maybe enable virtualization.
-  # virtualisation.libvirtd.enable = true;
-
   services.avahi = {
     enable = true;
     nssmdns = true;
@@ -109,32 +99,9 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.winston = {
-    isNormalUser = true;
-    extraGroups = [
-      "wheel"  # Enable ‘sudo’ for the user.
-      "docker"
-      "libvirtd"
-    ];
-  };
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    tmux
-    screen  # Serial terminals
-
-    coreutils  # Avoid busybox rm and gain more features.
-    unixtools.procps  # Avoid busybox ps and watch.
-    
-    nano
-    ed
-    vim
-    mg
-    emacs
-    ispell  # Emacs needs this for flyspell.
-
     libvterm  # Emacs vterm terminal emulator is $$$.
     cmake  # vterm needs this to compile.
     gnumake  # cmake needs it.  Not sure why this isn't pulled in already.
@@ -146,8 +113,6 @@
     qutebrowser
     tor-browser-bundle-bin
     firefox
-    lynx
-    links2
 
     sacc
 
@@ -210,7 +175,6 @@
     mpvc
     maim
     slop
-    neofetch
     arandr
     wmctrl
     picom
@@ -222,11 +186,6 @@
     ledger
     xournal
     v4l-utils
-
-    # VMs
-    libvirt
-    virt-manager
-    docker-compose
 
     # Gaming
     steam
@@ -244,6 +203,8 @@
     nodejs
     ghc
     ocaml
+
+    virt-manager
 
     # Network utilities and diagnostics
     inetutils
@@ -272,38 +233,8 @@
     config.boot.kernelPackages.perf
 
     # Utilities
-    rlwrap
-    tree
-    keychain
-    sshfs
-    pv
-    pwgen
-    ripgrep
-    file
-    parted
     gparted
     latencytop
-    powertop
-    htop
-    glances
-    mc
-    nwipe
-    ddrescue
-    cryptsetup  # Sometimes I manually mount stuff so ensure cryptsetup is
-                # always available
-    gnupg
-    acpi
-    sysstat
-    dstat
-    stress-ng
-    rsync
-    lsof
-    lnav
-    entr
-    lm_sensors
-    pciutils
-    hwinfo
-    lshw
 
     # Backup
     borgmatic
@@ -312,64 +243,8 @@
     # Remote login
     drawterm
     remmina
-
-    nixos-option
-    nix-index
     unison
-
-    hw-probe
   ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
-  hardware.rasdaemon.enable = true;
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    passwordAuthentication = false;
-    hostKeys = [
-      {
-        bits = 4096;
-        path = "/etc/ssh/ssh_host_rsa_key";
-        type = "rsa";
-      }
-      {
-        path = "/etc/ssh/ssh_host_ed25519_key";
-        type = "ed25519";
-      }
-      {
-        path = "/etc/ssh/ssh_host_ecdsa_key";
-        type = "ecdsa";
-      }
-    ];
-  };
-
-  virtualisation.libvirtd.enable = true;
-  virtualisation.docker.enable = true;
-  
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-  networking.firewall = {
-    rejectPackets = true;
-  };
-
-  nix = {
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
