@@ -1,7 +1,7 @@
 #+startup: indent
 * NixOS Configs
 
-[[https://github.com/NixOS/nixos-artwork/blob/master/logo/nixos.svg.png][https://github.com/NixOS/nixos-artwork/blob/master/logo/nixos.svg.png]]
+[[https://github.com/NixOS/nixos-artwork/raw/master/logo/nixos.svg.png][https://github.com/NixOS/nixos-artwork/raw/master/logo/nixos.svg.png]]
 
 NixOS configs split up by host.
 ** Setup
