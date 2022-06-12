@@ -8,6 +8,7 @@
   imports =
     [
       ./fonts.nix
+      ../package-overrides
     ];
 
   nixpkgs.config.allowUnfree = true;
@@ -315,6 +316,8 @@
     nixos-option
     nix-index
     unison
+
+    hw-probe
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
