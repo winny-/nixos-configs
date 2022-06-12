@@ -17,7 +17,6 @@
   };
 
   networking.hostName = "nightflyer";
-  time.timeZone = "America/Chicago";
 
   system.stateVersion = "22.05";
 

@@ -68,8 +68,6 @@
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   
-  time.timeZone = "America/Chicago";
-
   networking.useDHCP = false;
   networking.interfaces.enp39s0.useDHCP = true;
   networking.interfaces.wlo1.useDHCP = true;

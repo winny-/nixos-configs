@@ -1,10 +1,11 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, lib, ... }:
+with lib; {
   imports = [
     ../package-overrides
   ];
 
   nixpkgs.config.allowUnfree = true;
+  time.timeZone = mkDefault "America/Chicago";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
