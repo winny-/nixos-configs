@@ -335,6 +335,7 @@
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
+    passwordAuthentication = false;
     hostKeys = [
       {
         bits = 4096;
