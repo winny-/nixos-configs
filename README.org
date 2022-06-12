@@ -1,0 +1,37 @@
+#+startup: indent
+* NixOS Configs
+
+[[https://github.com/NixOS/nixos-artwork/blob/master/logo/nixos.svg.png][https://github.com/NixOS/nixos-artwork/blob/master/logo/nixos.svg.png]]
+
+NixOS configs split up by host.
+** Setup
+
+1. Clone the repository somewhere, such as =/etc/nixos/nixos-configs= --
+   ~git clone git@gitlab.com:winny/nixos-configs.git~ .
+2. Update =configuration.nix= to be a skeleton such as
+   #+begin_src nix
+     { config, pkgs, ... }:
+
+     {
+       imports =
+         [
+           ./hardware-configuration.nix
+           ./nixos-configs/hosts/HOSTNAME/default.nix
+         ];
+
+       system.stateVersion = "21.11";
+     }
+   #+end_src
+3. Set the HOSTNAME in above and ensure
+   =nixos-configs/hosts/HOSTNAME/default.nix= exists.
+4. Try to run ~nixos-rebuild switch~.
+
+
+#+begin_src bash
+  git clone git@gitlab.com:winny/nixos-configs.git ~/pro/nixos-configs
+  sudo ln -sv ~/pro/nixos-configs /etc/nixos/
+  sudo nixos-rebuild switch
+#+end_src
+** License
+
+Unlicense, see [[file:LICENSE]] .
