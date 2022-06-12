@@ -1,11 +1,37 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, options, ... }:
 with lib; {
   imports = [
     ../package-overrides
   ];
 
-  nixpkgs.config.allowUnfree = true;
+  fileSystems."/backup" = {
+    device = "/dev/disk/by-uuid/fb07e0e8-4cf1-4a53-a5ed-2330c6602525";
+    fsType = "ext4";
+    options = [ "noauto" ];
+  };
+
+  fileSystems."/multimedia" = {
+    device = "//silo.lan/multimedia";
+    fsType = "cifs";
+    options = [
+      "x-systemd.automount"
+      "nofail"
+      "x-systemd.idle-timeout=60"
+      "x-systemd.device-timeout=5s"
+      "x-systemd.mount-timeout=5s"
+      "user=guest"
+      "password=password"
+      "ro"
+    ];
+  };
+
+  services.zfs.autoSnapshot.enable = mkDefault config.boot.zfs.enabled;
   time.timeZone = mkDefault "America/Chicago";
+
+  nixpkgs.config.allowUnfree = true;
+  nix.extraOptions = ''
+      experimental-features = nix-command flakes
+  '';
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -52,12 +78,6 @@ with lib; {
   };
 
   networking.firewall.rejectPackets = true;
-
-  nix = {
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
 
   hardware.rasdaemon.enable = true;
 

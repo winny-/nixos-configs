@@ -14,7 +14,6 @@
   networking.hostName = "stargate";
   networking.hostId = "180b60c6";
 
-  services.zfs.autoSnapshot.enable = true;
   services.openssh.ports = [ 9999 ];
 
   environment.etc.crypttab = {
@@ -32,12 +31,6 @@
   fileSystems."/stuff" = {
     device = "/dev/Green/main";
     fsType = "ext4";
-  };
-
-  fileSystems."/backup" = {
-    device = "/dev/disk/by-uuid/fb07e0e8-4cf1-4a53-a5ed-2330c6602525";
-    fsType = "ext4";
-    options = [ "noauto" ];
   };
 
   fileSystems."/gentoo" = {
@@ -58,24 +51,12 @@
     options = [ "ro" ];
   };
 
-  fileSystems."/multimedia" = {
-    device = "//silo.lan/multimedia";
-    fsType = "cifs";
-    options = [
-      "x-systemd.automount" "nofail" "x-systemd.idle-timeout=60" "x-systemd.device-timeout=5s" "x-systemd.mount-timeout=5s" "user=guest" "password=password" "ro"
-    ];
-  };
-
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   
   networking.useDHCP = false;
   networking.interfaces.enp39s0.useDHCP = true;
   networking.interfaces.wlo1.useDHCP = true;
  
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
