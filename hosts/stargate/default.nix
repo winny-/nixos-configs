@@ -14,7 +14,7 @@
   networking.hostName = "stargate";
   networking.hostId = "180b60c6";
 
-  services.openssh.ports = [ 9999 ];
+  services.openssh.ports = [ 22 9999 ];
 
   environment.etc.crypttab = {
     enable = true;
