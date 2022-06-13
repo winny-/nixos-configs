@@ -137,6 +137,9 @@ with lib; {
     nixos-option
     nix-index
 
+    direnv
+    nix-direnv
+
     hw-probe
   ];
 }
