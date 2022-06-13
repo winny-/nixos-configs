@@ -18,6 +18,10 @@
 
   networking.hostName = "nightflyer";
 
+  # nix-build falls back to /run/users/0 - tmpfs on a memory constrained
+  # system is no good.
+  environment.variables.TMPDIR = "/tmp";
+
   system.stateVersion = "22.05";
 
 }
