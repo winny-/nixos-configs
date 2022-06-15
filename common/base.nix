@@ -79,7 +79,7 @@ with lib; {
 
   networking.firewall.rejectPackets = true;
 
-  hardware.rasdaemon.enable = true;
+  hardware.rasdaemon.enable = mkDefault true;
 
   environment.systemPackages = with pkgs; [
     tmux

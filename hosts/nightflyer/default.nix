@@ -22,6 +22,9 @@
   # system is no good.
   environment.variables.TMPDIR = "/tmp";
 
+  # Spams logs with warnings.  Journal log I/O not worth the benefit.
+  hardware.rasdaemon.enable = false;
+
   system.stateVersion = "22.05";
 
 }
