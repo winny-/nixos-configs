@@ -11,6 +11,7 @@
       ./fonts.nix
       ./docker.nix
       ./libvirtd.nix
+      ./android.nix
     ];
 
   services.xserver = {
