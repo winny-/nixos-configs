@@ -80,6 +80,7 @@ with lib; {
   networking.firewall.rejectPackets = true;
 
   hardware.rasdaemon.enable = mkDefault true;
+  services.fwupd.enable = mkDefault true;
 
   environment.systemPackages = with pkgs; [
     tmux
