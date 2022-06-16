@@ -1,0 +1,45 @@
+--- a/common/common.c	2022-06-16 08:58:47.492243892 -0500
++++ b/common/common.c	2022-06-16 08:59:18.254549802 -0500
+@@ -1044,36 +1044,10 @@
+ 
+ char * get_libname(const char* base_libname)
+ {
+-	DIR *dp;
+-	struct dirent *dirp;
+-	int index = 0;
+-	char *libname_path = NULL;
+-	char current_test_path[LARGEBUF];
+-	size_t base_libname_length = strlen(base_libname);
+-
+-	for(index = 0 ; (search_paths[index] != NULL) && (libname_path == NULL) ; index++)
+-	{
+-		memset(current_test_path, 0, LARGEBUF);
+-
+-		if ((dp = opendir(search_paths[index])) == NULL)
+-			continue;
+-
+-		upsdebugx(2,"Looking for lib %s in directory #%d : %s", base_libname, index, search_paths[index]);
+-		while ((dirp = readdir(dp)) != NULL)
+-		{
+-			upsdebugx(5,"Comparing lib %s with dirpath %s", base_libname, dirp->d_name);
+-			int compres = strncmp(dirp->d_name, base_libname, base_libname_length);
+-			if(compres == 0) {
+-				snprintf(current_test_path, LARGEBUF, "%s/%s", search_paths[index], dirp->d_name);
+-				libname_path = realpath(current_test_path, NULL);
+-				upsdebugx(2,"Candidate path for lib %s is %s (realpath %s)", base_libname, current_test_path, (libname_path!=NULL)?libname_path:"NULL");
+-				if (libname_path != NULL)
+-					break;
+-			}
+-		}
+-		closedir(dp);
+-	}
+-
+-	upsdebugx(1,"Looking for lib %s, found %s", base_libname, (libname_path!=NULL)?libname_path:"NULL");
+-	return libname_path;
++       char *s = NULL;
++       if (!strcmp(base_libname, "libusb-0.1.so")) {
++          return NULL;
++       }
++       s = malloc(strlen(base_libname)+1);
++       return strcpy(s, base_libname);
+ }
