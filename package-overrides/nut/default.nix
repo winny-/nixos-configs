@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchurl, pkg-config, neon, libusb-compat-0_1, openssl, udev, avahi, freeipmi
+{ lib, stdenv, fetchurl, pkg-config, neon, libusb1, openssl, udev, avahi, freeipmi
 , libtool, makeWrapper, autoreconfHook, libmodbus, i2c-tools, net-snmp, gd
 }:
 
@@ -17,7 +17,7 @@ stdenv.mkDerivation rec {
     ./fix-library-loading-nixos.patch
   ];
 
-  buildInputs = [ neon libusb-compat-0_1 openssl udev avahi freeipmi libmodbus gd i2c-tools net-snmp ];
+  buildInputs = [ neon libusb1 openssl udev avahi freeipmi libmodbus gd i2c-tools net-snmp ];
 
   nativeBuildInputs = [ autoreconfHook libtool pkg-config makeWrapper ];
 
@@ -35,7 +35,7 @@ stdenv.mkDerivation rec {
 
   postInstall = ''
     wrapProgram $out/bin/nut-scanner --prefix LD_LIBRARY_PATH : \
-      "$out/lib:${neon}/lib:${libusb-compat-0_1.out}/lib:${avahi}/lib:${freeipmi}/lib:${net-snmp.out.lib}/lib"
+      "$out/lib:${neon}/lib:${libusb1.out}/lib:${avahi}/lib:${freeipmi}/lib:${net-snmp.out.lib}/lib"
   '';
 
   meta = with lib; {
