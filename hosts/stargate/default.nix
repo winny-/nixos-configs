@@ -17,12 +17,9 @@
 
   services.openssh.ports = [ 22 9999 ];
 
-  environment.etc.crypttab = {
-    enable = true;
-    text = ''
-      greenCrypt UUID=704eca58-8f57-4f53-989e-56511d731366 /secrets/green.key luks
-    '';
-  };
+  environment.etc.crypttab.text = ''
+    greenCrypt UUID=704eca58-8f57-4f53-989e-56511d731366 /secrets/green.key luks
+  '';
 
   fileSystems."/games" = {
     device = "/dev/Green/games";
