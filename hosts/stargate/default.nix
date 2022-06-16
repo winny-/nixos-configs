@@ -2,7 +2,8 @@
 
 {
   imports = [
-      ../../common/winston.nix
+    ../../common/winston.nix
+    ./ups.nix
   ];
   
   # Use the systemd-boot EFI boot loader.
