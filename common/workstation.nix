@@ -210,6 +210,9 @@
     ghc
     ocaml
 
+    glab
+    gh
+
     virt-manager
 
     # Network utilities and diagnostics
