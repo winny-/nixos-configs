@@ -146,7 +146,8 @@
     # Image editing
     inkscape
     gimp
-    
+
+    deadbeef-with-plugins
     pavucontrol
     obs-studio
     ffmpeg

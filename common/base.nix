@@ -88,6 +88,7 @@ with lib; {
 
     coreutils  # Avoid busybox rm and gain more features.
     unixtools.procps  # Avoid busybox ps and watch.
+    usbutils  # Avoid busybox lsusb
 
     nano
     ed
@@ -142,5 +143,8 @@ with lib; {
     nix-direnv
 
     hw-probe
+
+    man-pages
+    man-pages-posix
   ];
 }
