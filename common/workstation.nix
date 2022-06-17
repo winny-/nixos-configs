@@ -191,6 +191,7 @@
     ledger
     xournal
     v4l-utils
+    emote  # Emoji selector
 
     # Gaming
     steam
