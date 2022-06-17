@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ../../common/winston.nix
+    ../../common/workstation.nix
     ../../common/laptop.nix
   ];
   # Use the systemd-boot EFI boot loader.
