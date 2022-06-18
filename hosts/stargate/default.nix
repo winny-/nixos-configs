@@ -5,7 +5,7 @@
     ../../common/workstation.nix
     ./ups.nix
   ];
-  
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -50,11 +50,12 @@
   };
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-  
+
   networking.useDHCP = false;
   networking.interfaces.enp39s0.useDHCP = true;
+  networking.interfaces.enp39s0.wakeOnLan.enable = true;
   networking.interfaces.wlo1.useDHCP = true;
- 
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
