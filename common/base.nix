@@ -56,6 +56,8 @@ with lib; {
     enableSSHSupport = true;
   };
 
+  services.irqbalance.enable = true;
+
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
