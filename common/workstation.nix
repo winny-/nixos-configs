@@ -153,6 +153,8 @@
     deadbeef-with-plugins
     pavucontrol
     obs-studio
+    kdenlive
+    kazam
     ffmpeg
     mpv
     zathura
@@ -167,9 +169,9 @@
     xorg.listres
     xorg.xeyes
     xorg.xclock
-    xscreensaver
     xfce.xfce4-terminal
     xfce.xfce4-whiskermenu-plugin
+    libnotify  # notify-send
     rofi
     xbindkeys
     dunst
@@ -209,6 +211,7 @@
     nodejs
     ghc
     ocaml
+    sbcl
 
     glab
     gh
