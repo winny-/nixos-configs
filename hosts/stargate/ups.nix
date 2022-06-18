@@ -16,7 +16,7 @@
   # Also looking in wrong state directory OOTB.
   environment.variables = {
     NUT_CONFPATH = "/etc/nut";
-    NUT_STATEPATH = "/var/lib/nut/"; 
+    NUT_STATEPATH = "/var/lib/nut/";
   };
 
 

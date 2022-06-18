@@ -38,13 +38,13 @@
                 MatchDevicePath "/dev/input/event*"
                 Driver "evdev"
 
-        #       Physical button #s:     A b D - - - - B C    
+        #       Physical button #s:     A b D - - - - B C
         #       Option "ButtonMapping" "1 8 3 4 5 6 7 2 2"   right-hand placement
         #       Option "ButtonMapping" "3 8 1 4 5 6 7 2 2"   left-hand placement
-        #       b = A & D 
+        #       b = A & D
                 Option "ButtonMapping" "1 8 3 4 5 6 7 2 2"
 
-        #       EmulateWheel: Use Marble Mouse trackball as mouse wheel 
+        #       EmulateWheel: Use Marble Mouse trackball as mouse wheel
         #       Factory Default: 8; Use 9 for right side small button
                 Option "EmulateWheel" "true"
                 Option "EmulateWheelButton" "8"
@@ -76,12 +76,12 @@
         EndSection
       '';
   };
-  
+
   services.avahi = {
     enable = true;
     nssmdns = true;
   };
-  
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
   services.printing.drivers = with pkgs; [
@@ -122,7 +122,7 @@
 
     jq
     yq
-    
+
     # Correspondence
     thunderbird
     neomutt
@@ -267,4 +267,3 @@
   system.stateVersion = "21.11"; # Did you read the comment?
 
 }
-

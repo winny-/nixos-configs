@@ -1,7 +1,7 @@
 --- a/common/common.c	2022-06-16 08:58:47.492243892 -0500
 +++ b/common/common.c	2022-06-16 08:59:18.254549802 -0500
 @@ -1044,36 +1044,10 @@
- 
+
  char * get_libname(const char* base_libname)
  {
 -	DIR *dp;
