@@ -215,6 +215,7 @@
 
     glab
     gh
+    pre-commit
 
     virt-manager
 
