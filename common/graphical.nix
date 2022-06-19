@@ -96,6 +96,15 @@
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.extraConfig = ''
+
+    ################################################################
+    # from graphical.nix
+    ################################################################
+
+    # Disable annoying audio click in/out when playback is paused temporarily.
+    unload-module module-suspend-on-idle
+  '';
   hardware.bluetooth.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
