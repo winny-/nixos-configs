@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../common/workstation.nix
+    ../../common/graphical.nix
     ./ups.nix
   ];
 
