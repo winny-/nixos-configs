@@ -138,6 +138,9 @@ with lib; {
     pciutils
     hwinfo
 
+    bsdgames
+    nethack
+
     nixos-option
     nix-index
 

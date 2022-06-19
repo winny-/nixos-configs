@@ -12,6 +12,7 @@
       ./docker.nix
       ./libvirtd.nix
       ./android.nix
+      ./games.nix
     ];
 
   services.xserver = {
@@ -194,12 +195,6 @@
     xournal
     v4l-utils
     emote  # Emoji selector
-
-    # Gaming
-    steam
-    xonotic
-    nethack
-    gzdoom
 
     # Coding stuff
     racket
