@@ -151,6 +151,8 @@
     inkscape
     gimp
 
+    openvpn
+
     deadbeef-with-plugins
     pavucontrol
     obs-studio
