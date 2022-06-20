@@ -98,6 +98,18 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
 
+  # Theming
+  qt5.platformTheme = "gtk";
+  environment.etc."xdg/gtk-2.0/gtkrc".text = ''
+    gtk-theme-name="Vertex-Dark"
+    gtk-icon-theme-name="HighContrast"
+  '';
+  environment.etc."xdg/gtk-3.0/settings.ini".text = ''
+    [Settings]
+    gtk-icon-theme-name=High Contrast
+    gtk-theme-name=Vertex-Dark
+  '';
+
   users.users.winston.extraGroups = [ "wireshark" ];
   programs.wireshark.enable = true;
 
@@ -167,11 +179,13 @@
     xsel
     xclip
     glxinfo
+    xorg.xdpyinfo
     xorg.listres
     xorg.xeyes
     xorg.xclock
     xfce.xfce4-terminal
     xfce.xfce4-whiskermenu-plugin
+    theme-vertex
     libnotify  # notify-send
     rofi
     xbindkeys
