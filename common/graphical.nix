@@ -159,6 +159,7 @@
     # Image editing
     inkscape
     gimp
+    imagemagick
 
     openvpn
 
