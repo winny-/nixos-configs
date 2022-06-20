@@ -13,6 +13,7 @@
       ./libvirtd.nix
       ./android.nix
       ./games.nix
+      ./printing.nix
     ];
 
   services.xserver = {
@@ -77,19 +78,6 @@
         EndSection
       '';
   };
-
-  services.avahi = {
-    enable = true;
-    nssmdns = true;
-  };
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-  services.printing.drivers = with pkgs; [
-    gutenprint
-    gutenprintBin
-    postscript-lexmark
-  ];
 
   services.ddccontrol.enable = true;
 
