@@ -25,6 +25,15 @@ with lib; {
     ];
   };
 
+  fileSystems."/tmp" = {
+    fsType = "tmpfs";
+    options = [
+      "noatime"
+      "mode=1777"
+      "size=4G"
+    ];
+  };
+
   services.zfs.autoSnapshot.enable = mkDefault config.boot.zfs.enabled;
   time.timeZone = mkDefault "America/Chicago";
 
