@@ -9,5 +9,6 @@
   nixpkgs.config.packageOverrides = pkgs: rec {
     hw-probe = pkgs.callPackage ./hw-probe.nix {};
     nut = pkgs.callPackage ./nut {};
+    droid-fonts = pkgs.callPackage ./droid-fonts {};
   };
 }

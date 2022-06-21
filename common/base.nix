@@ -100,6 +100,7 @@ with lib; {
     ispell  # Emacs needs this for flyspell.
 
     git
+    git-lfs
 
     lynx
     links2

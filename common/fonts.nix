@@ -5,9 +5,9 @@
     enableDefaultFonts = true;
     fontconfig = {
       defaultFonts = {
-        serif = [ "Go" ];
-	      monospace = [ "Go Mono" ];
-	      sansSerif = [ "Roboto" ];
+        serif = [ "Liberation Serif" ];
+        monospace = [ "mononoki" ];
+        sansSerif = [ "Droid Sans" ];
       };
     };
     fonts = with pkgs; [
@@ -22,6 +22,7 @@
       proggyfonts
       go-font
       mononoki
+      droid-fonts
     ];
   };
 }
