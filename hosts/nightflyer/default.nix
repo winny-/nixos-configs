@@ -22,6 +22,8 @@
   # system is no good.
   environment.variables.TMPDIR = "/tmp";
 
+  environment.systemPackages = with pkgs; [ emacs-nox ];
+
   # Spams logs with warnings.  Journal log I/O not worth the benefit.
   hardware.rasdaemon.enable = false;
 

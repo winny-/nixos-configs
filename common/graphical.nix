@@ -116,10 +116,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    libvterm  # Emacs vterm terminal emulator is $$$.
-    cmake  # vterm needs this to compile.
-    gnumake  # cmake needs it.  Not sure why this isn't pulled in already.
-    gcc  # Need a compiler too.
+    (emacsWithPackages [ emacsPackages.vterm ])
+
     git
     git-crypt
 

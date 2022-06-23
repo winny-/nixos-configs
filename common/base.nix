@@ -105,7 +105,8 @@ with lib; {
     ed
     vim
     mg
-    emacs
+    # This will override entry in graphical.nix - so disable.  Add emacs-nox where applicable.
+    # emacs-nox
     ispell  # Emacs needs this for flyspell.
 
     git
