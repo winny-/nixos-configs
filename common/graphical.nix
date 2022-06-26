@@ -241,7 +241,6 @@
     bind
     bridge-utils
     ethtool
-    mosh
     wgetpaste
     socat
     busybox  # For httpd.

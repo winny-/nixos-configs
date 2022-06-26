@@ -2,6 +2,7 @@
 with lib; {
   imports = [
     ../package-overrides
+    ./mosh.nix
   ];
 
   fileSystems."/backup" = {
