@@ -167,6 +167,8 @@
     kdenlive
     kazam
     ffmpeg
+    ffcast  # rofi-screenshot
+    xorg.xwininfo # rofi-screenshot
     mpv
     zathura
     i3
