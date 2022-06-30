@@ -3,6 +3,7 @@
 {
   imports = [
     ../../common/graphical.nix
+    ../../common/mpd.nix
     ./ups.nix
   ];
 
