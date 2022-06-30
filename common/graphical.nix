@@ -117,6 +117,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     (emacsWithPackages [ emacsPackages.vterm ])
+    sqlite-interactive
 
     git
     git-crypt
@@ -211,8 +212,9 @@
     emote  # Emoji selector
 
     # Coding stuff
+    dbeaver
     racket
-    python
+    python3
     virtualenv
     postgresql
     pre-commit
@@ -233,6 +235,8 @@
     mtr
     iperf
     wireshark
+    ghidra
+    binwalk
     openssl
     speedtest-cli
     httpie

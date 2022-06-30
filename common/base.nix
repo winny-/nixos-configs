@@ -127,6 +127,7 @@ with lib; {
     ripgrep
     file
     parted
+    smartmontools
 
     powertop
 
