@@ -31,6 +31,13 @@
     };
     layout = "us";
     xkbVariant = "dvorak";
+
+    libinput = {
+      enable = true;
+      mouse.tapping = false;
+      touchpad.clickMethod = "clickfinger";
+    };
+
     extraConfig =
       ''
         Section "InputClass"
@@ -95,9 +102,6 @@
   '';
   hardware.bluetooth.enable = true;
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
-
   # Theming
   qt5.platformTheme = "gtk";
   environment.etc."xdg/gtk-2.0/gtkrc".text = ''
@@ -108,6 +112,7 @@
     [Settings]
     gtk-icon-theme-name=High Contrast
     gtk-theme-name=Vertex-Dark
+    gtk-cursor-theme-name=Adwaita
   '';
 
   users.users.winston.extraGroups = [ "wireshark" ];
@@ -172,6 +177,7 @@
     xorg.xwininfo # rofi-screenshot
     mpv
     zathura
+    awesome
     i3
     i3status
     i3lock
@@ -187,6 +193,7 @@
     xfce.xfce4-terminal
     xfce.xfce4-whiskermenu-plugin
     theme-vertex
+    gnome.adwaita-icon-theme  # Cursor
     libnotify  # notify-send
     rofi
     xbindkeys
