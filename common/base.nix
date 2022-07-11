@@ -111,6 +111,7 @@ with lib; {
     ispell  # Emacs needs this for flyspell.
 
     git
+    git-ignore
     git-lfs
 
     lynx
