@@ -116,6 +116,8 @@ with lib; {
     lynx
     links2
 
+    shellcheck
+
     neofetch
 
     rlwrap
