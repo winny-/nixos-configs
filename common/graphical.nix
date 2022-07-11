@@ -14,6 +14,7 @@
       ./android.nix
       ./games.nix
       ./printing.nix
+      ./wireshark.nix
     ];
 
   services.xserver = {
@@ -115,8 +116,6 @@
     gtk-cursor-theme-name=Adwaita
   '';
 
-  users.users.winston.extraGroups = [ "wireshark" ];
-  programs.wireshark.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -241,7 +240,6 @@
     inetutils
     mtr
     iperf
-    wireshark
     ghidra
     binwalk
     openssl
