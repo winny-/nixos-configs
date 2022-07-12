@@ -15,6 +15,7 @@
       ./games.nix
       ./printing.nix
       ./wireshark.nix
+      ./syncthing.nix
     ];
 
   services.xserver = {
