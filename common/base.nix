@@ -102,6 +102,8 @@ with lib; {
     unixtools.procps  # Avoid busybox ps and watch.
     usbutils  # Avoid busybox lsusb
 
+    fzf
+
     nano
     ed
     vim
