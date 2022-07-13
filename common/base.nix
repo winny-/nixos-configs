@@ -120,6 +120,7 @@ with lib; {
     links2
 
     shellcheck
+    licensor
 
     neofetch
 
