@@ -16,6 +16,7 @@
       ./printing.nix
       ./wireshark.nix
       ./syncthing.nix
+      ./cdrecord.nix
     ];
 
   services.xserver = {
