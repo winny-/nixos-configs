@@ -72,6 +72,7 @@ with lib; {
   services.openssh = {
     enable = true;
     passwordAuthentication = false;
+    forwardX11 = true;
     hostKeys = [
       {
         bits = 4096;
