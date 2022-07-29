@@ -181,6 +181,7 @@
     ffcast  # rofi-screenshot
     xorg.xwininfo # rofi-screenshot
     mpv
+    mediainfo
     zathura
     awesome
     i3
@@ -191,6 +192,7 @@
     xsel
     xclip
     glxinfo
+    xorg.xkill
     xorg.xdpyinfo
     xorg.listres
     xorg.xeyes
