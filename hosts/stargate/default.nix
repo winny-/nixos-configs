@@ -4,6 +4,7 @@
   imports = [
     ../../common/graphical.nix
     ../../common/mpd.nix
+    ./borgmatic.nix
     ./ups.nix
   ];
 
