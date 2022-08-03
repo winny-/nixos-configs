@@ -17,6 +17,7 @@
       ./wireshark.nix
       ./syncthing.nix
       ./cdrecord.nix
+      ./mime.nix
     ];
 
   services.xserver = {
