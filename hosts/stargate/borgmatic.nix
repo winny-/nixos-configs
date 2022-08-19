@@ -34,9 +34,11 @@
 
   systemd.timers.daily-backup = {
     enable = true;
+    timerConfig = {
+      Unit = "backup.service";
+      OnCalendar = [ "*-*-* *:00:00" ];
+    };
     wantedBy = [ "timers.target" ];
-    partOf = [ "backup.service" ];
-    timerConfig.OnCalendar = [ "*-*-* *:00:00" ];
   };
 
   environment.etc."borgmatic/borgbase.yaml".text = ''
@@ -48,6 +50,7 @@
       exclude_patterns:
         - /root/.cache
         - /home/*/.cache
+        - '*/steamapps'
       repositories:
         - tw8vh7jl@tw8vh7jl.repo.borgbase.com:repo
       one_file_system: true
