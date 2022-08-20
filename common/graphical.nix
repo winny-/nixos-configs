@@ -20,6 +20,11 @@
       ./mime.nix
     ];
 
+  services.netdata = {
+    enable = true;
+    python.enable = true;
+  };
+
   services.xserver = {
     enable = true;
     displayManager = {
