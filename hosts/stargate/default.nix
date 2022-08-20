@@ -53,10 +53,7 @@
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
-  networking.useDHCP = false;
-  networking.interfaces.enp39s0.useDHCP = true;
-  networking.interfaces.enp39s0.wakeOnLan.enable = true;
-  networking.interfaces.wlo1.useDHCP = true;
+  networking.networkmanager.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
