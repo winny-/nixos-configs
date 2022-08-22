@@ -18,7 +18,10 @@
       fi
     '';
     path = [ pkgs.openssh ];
-    wantedBy = [ "multi-user.target" ];
+    wantedBy = [
+      "multi-user.target"
+      "backup.service"
+    ];
   };
 
   systemd.services.backup = {
