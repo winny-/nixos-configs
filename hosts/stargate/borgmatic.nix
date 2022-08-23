@@ -27,6 +27,7 @@
   systemd.services.backup = {
     enable = true;
     serviceConfig.Type = "oneshot";
+    unitConfig.Wants = [ "network-online.target" ];
     path = [ pkgs.borgmatic ];
     script = ''
       borgmatic -c /etc/borgmatic/borgbase.yaml \
