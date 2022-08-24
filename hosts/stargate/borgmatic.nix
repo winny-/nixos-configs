@@ -40,7 +40,7 @@
     enable = true;
     timerConfig = {
       Unit = "backup.service";
-      OnCalendar = [ "*-*-* *:00:00" ];
+      OnCalendar = [ "*-*-* 04:00:00" ];
     };
     wantedBy = [ "timers.target" ];
   };
