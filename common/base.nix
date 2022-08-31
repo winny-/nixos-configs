@@ -11,7 +11,7 @@ with lib; {
     options = [ "noauto" ];
   };
 
-  fileSystems."/multimedia" = {
+  fileSystems."/mnt/multimedia" = {
     device = "//silo.lan/multimedia";
     fsType = "cifs";
     options = [
