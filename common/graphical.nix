@@ -40,6 +40,7 @@
     };
     layout = "us";
     xkbVariant = "dvorak";
+    xkbOptions = "ctrl:swapcaps";
 
     libinput = {
       enable = true;
