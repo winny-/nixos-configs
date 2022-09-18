@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<head>
+  <title>Localhost Portal</title>
+  <style>
+   * {
+     padding: 0;
+     margin: 0;
+   }
+   a {
+     color: blue;
+   }
+   a:hover {
+     color: black;
+     background: blue;
+   }
+   a.nohover:hover {
+     color: inherit;
+     background: inherit;
+   }
+   li {
+     padding: .2rem;
+   }
+   ul {
+     list-style: none;
+   }
+   body {
+     background: black;
+     color: #eee;
+     font-size: 2em;
+   }
+   img {
+     max-width: 5rem;
+     padding: 1rem;
+     filter: drop-shadow(0px 0px 15px white);
+   }
+   #content {
+     max-width: 90%;
+     margin: auto;
+   }
+  </style>
+</head>
+<body>
+  <div id="content">
+    <a class="nohover" href="https://nixos.org/">
+      <img src="/nixos.svg" />
+    </a>
+    <h1>Service Dashboards</h1>
+    <ul>
+      <li><a href="/cups">CUPS</a></li>
+      <li><a href="/syncthing">Syncthing</a></li>
+      <li><a href="/netdata">Netdata</a></li>
+    </ul>
+    <h1>NixOS Helpers</h1>
+    <ul>
+      <li><a href="https://search.nixos.org/options">Options Search</a></li>
+      <li><a href="https://search.nixos.org/packages">Package Search</a></li>
+    </ul>
+  </div>
+</body>
