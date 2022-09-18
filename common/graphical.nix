@@ -18,6 +18,7 @@
       ./syncthing.nix
       ./cdrecord.nix
       ./mime.nix
+      ./portal
     ];
 
   services.netdata = {
