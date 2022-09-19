@@ -95,6 +95,8 @@ with lib; {
   hardware.rasdaemon.enable = mkDefault true;
   services.fwupd.enable = mkDefault true;
 
+  environment.homeBinInPath = true;
+
   environment.systemPackages = with pkgs; [
     tmux
     screen  # Serial terminals
