@@ -4,8 +4,6 @@
     portal-www-root = pkgs.callPackage ./portal-www-root {};
   };
 
-  environment.systemPackages = [ pkgs.portal-www-root ];
-
   services.nginx = {
     enable = true;
     virtualHosts.localhost = {
