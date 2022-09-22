@@ -137,6 +137,7 @@ with lib; {
     file
     parted
     smartmontools
+    iotop
 
     powertop
 
@@ -152,6 +153,7 @@ with lib; {
     sysstat
     dstat
     stress-ng
+    nmap
     rsync
     lsof
     lnav
