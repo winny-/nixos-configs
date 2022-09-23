@@ -1,6 +1,6 @@
 { ... }:
 {
   imports = [
-    ../../libvirt-guest.nix
+    ../../common/libvirt-guest.nix
   ];
 }
