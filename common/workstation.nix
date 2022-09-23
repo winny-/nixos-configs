@@ -1,25 +1,50 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
-
 {
-  imports =
-    [
-      ./base.nix
-      ./fonts.nix
-      ./docker.nix
-      ./libvirtd.nix
-      ./android.nix
-      ./games.nix
-      ./printing.nix
-      ./wireshark.nix
-      ./syncthing.nix
-      ./cdrecord.nix
-      ./mime.nix
-      ./portal
+  imports = [
+    ./base.nix
+    ./bare-metal.nix
+    ./fonts.nix
+    ./docker.nix
+    ./libvirtd.nix
+    ./android.nix
+    ./games.nix
+    ./printing.nix
+    ./wireshark.nix
+    ./syncthing.nix
+    ./cdrecord.nix
+    ./mime.nix
+    ./portal
+  ];
+
+  fileSystems."/backup" = {
+    device = "/dev/disk/by-uuid/fb07e0e8-4cf1-4a53-a5ed-2330c6602525";
+    fsType = "ext4";
+    options = [ "noauto" ];
+  };
+
+  fileSystems."/mnt/multimedia" = {
+    device = "//silo.lan/multimedia";
+    fsType = "cifs";
+    options = [
+      "x-systemd.automount"
+      "nofail"
+      "x-systemd.idle-timeout=60"
+      "x-systemd.device-timeout=5s"
+      "x-systemd.mount-timeout=5s"
+      "user=guest"
+      "password=password"
+      "ro"
     ];
+  };
+
+  fileSystems."/tmp" = {
+    fsType = "tmpfs";
+    options = [
+      "noatime"
+      "mode=1777"
+      "size=4G"
+    ];
+  };
 
   services.netdata = {
     enable = true;
@@ -105,7 +130,7 @@
   hardware.pulseaudio.extraConfig = ''
 
     ################################################################
-    # from graphical.nix
+    # from workstation.nix
     ################################################################
 
     # Disable annoying audio click in/out when playback is paused temporarily.
@@ -299,5 +324,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "21.11"; # Did you read the comment?
-
 }

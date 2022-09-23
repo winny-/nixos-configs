@@ -5,36 +5,6 @@ with lib; {
     ./mosh.nix
   ];
 
-  fileSystems."/backup" = {
-    device = "/dev/disk/by-uuid/fb07e0e8-4cf1-4a53-a5ed-2330c6602525";
-    fsType = "ext4";
-    options = [ "noauto" ];
-  };
-
-  fileSystems."/mnt/multimedia" = {
-    device = "//silo.lan/multimedia";
-    fsType = "cifs";
-    options = [
-      "x-systemd.automount"
-      "nofail"
-      "x-systemd.idle-timeout=60"
-      "x-systemd.device-timeout=5s"
-      "x-systemd.mount-timeout=5s"
-      "user=guest"
-      "password=password"
-      "ro"
-    ];
-  };
-
-  fileSystems."/tmp" = {
-    fsType = "tmpfs";
-    options = [
-      "noatime"
-      "mode=1777"
-      "size=4G"
-    ];
-  };
-
   services.zfs.autoSnapshot.enable = mkDefault config.boot.zfs.enabled;
   time.timeZone = mkDefault "America/Chicago";
 
@@ -66,8 +36,6 @@ with lib; {
     enableSSHSupport = true;
   };
 
-  services.irqbalance.enable = true;
-
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
@@ -92,9 +60,6 @@ with lib; {
 
   networking.firewall.rejectPackets = true;
 
-  hardware.rasdaemon.enable = mkDefault true;
-  services.fwupd.enable = mkDefault true;
-
   environment.homeBinInPath = true;
 
   environment.systemPackages = with pkgs; [
@@ -111,7 +76,6 @@ with lib; {
     ed
     vim
     mg
-    # This will override entry in graphical.nix - so disable.  Add emacs-nox where applicable.
     # emacs-nox
     ispell  # Emacs needs this for flyspell.
 

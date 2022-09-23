@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../common/graphical.nix
+    ../../common/workstation.nix
     ../../common/mpd.nix
     ../../common/networkmanager.nix
     ./borgmatic.nix
