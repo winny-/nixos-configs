@@ -1,6 +1,40 @@
 {
   "nodes": {
+    "jhmod": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1663949506,
+        "narHash": "sha256-+jYdxo8ph3EOqt2PMFPP9erhw3bHUpF99OqEUK6iGZA=",
+        "owner": "sector-f",
+        "repo": "jhmod",
+        "rev": "4470eba57f3c3969ab04ef1be1dbf761be5a2c0f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sector-f",
+        "repo": "jhmod",
+        "rev": "4470eba57f3c3969ab04ef1be1dbf761be5a2c0f",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
+      "locked": {
+        "lastModified": 1659446231,
+        "narHash": "sha256-hekabNdTdgR/iLsgce5TGWmfIDZ86qjPhxDg/8TlzhE=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "eabc38219184cc3e04a974fe31857d8e0eac098d",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-21.11",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
       "locked": {
         "lastModified": 1664158485,
         "narHash": "sha256-OJjPilaj2R0yAwjg4O96iJLWKoW2+TeLlDpk0yF73xE=",
@@ -18,7 +52,8 @@
     },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "jhmod": "jhmod",
+        "nixpkgs": "nixpkgs_2"
       }
     }
   },

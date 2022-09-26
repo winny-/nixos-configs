@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   programs.steam.enable = true;
 
@@ -6,5 +6,6 @@
     steam
     xonotic
     gzdoom
+    inputs.jhmod.packages.x86_64-linux.jhmod
   ];
 }

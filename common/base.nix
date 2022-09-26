@@ -1,9 +1,11 @@
-{ config, pkgs, lib, options, ... }:
+{ config, pkgs, lib, options, inputs, ... }:
 with lib; {
   imports = [
     ../package-overrides
     ./mosh.nix
   ];
+
+  hardware.enableAllFirmware = true;
 
   services.zfs.autoSnapshot.enable = mkDefault config.boot.zfs.enabled;
   time.timeZone = mkDefault "America/Chicago";
