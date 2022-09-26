@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 {
   imports = [
+    ./hardware-configuration.nix
     ../../common/workstation.nix
     ../../common/laptop.nix
     ../../common/networkmanager.nix
