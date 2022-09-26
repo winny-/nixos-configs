@@ -7,9 +7,7 @@
 
   outputs = { self, nixpkgs, jhmod }@inputs:
     let
-      hosts = nixpkgs.lib.attrsets.mapAttrsToList
-        (name: value: name)
-        (builtins.readDir ./hosts);
+      hosts = builtins.attrNames (builtins.readDir ./hosts);
     in
       {
         nixosConfigurations =
