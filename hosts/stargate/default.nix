@@ -7,6 +7,7 @@
     ../../common/networkmanager.nix
     ./borgmatic.nix
     ./ups.nix
+    ./hardware-configuration.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
