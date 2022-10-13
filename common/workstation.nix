@@ -75,6 +75,8 @@ with lib;
       touchpad.clickMethod = "clickfinger";
     };
 
+    synaptics.tapButtons = mkDefault false;
+
     extraConfig =
       ''
         Section "InputClass"
