@@ -16,6 +16,9 @@
               system = "x86_64-linux";
               modules = [
                 (./. + "/hosts/${hostName}")
+                ({ ... }: {
+                  nix.registry.nixpkgs.flake = nixpkgs;
+                })
               ];
               specialArgs = { inherit inputs; };
             });
