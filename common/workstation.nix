@@ -1,4 +1,5 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
+with lib;
 {
   imports = [
     ./base.nix
@@ -54,15 +55,15 @@
   services.xserver = {
     enable = true;
     displayManager = {
-      defaultSession = "xfce";
+      defaultSession = mkDefault "xfce";
       lightdm.enable = true;
       startx.enable = true;
       autoLogin.user = "winston";
     };
     desktopManager = {
-      gnome.enable = false;
-      pantheon.enable = false;
-      xfce.enable = true;
+      gnome.enable = mkDefault false;
+      pantheon.enable = mkDefault false;
+      xfce.enable = mkDefault true;
     };
     layout = "us";
     xkbVariant = "dvorak";
@@ -139,7 +140,7 @@
   hardware.bluetooth.enable = true;
 
   # Theming
-  qt5.platformTheme = "gtk";
+  qt5.platformTheme = mkDefault "gtk";
   environment.etc."xdg/gtk-2.0/gtkrc".text = ''
     gtk-theme-name="Vertex-Dark"
     gtk-icon-theme-name="HighContrast"

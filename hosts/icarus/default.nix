@@ -16,6 +16,12 @@
     allowDiscards = true;
   };
 
+  # services.xserver.desktopManager.gnome.enable = true;
+  # services.xserver.displayManager.defaultSession = "gnome";
+  # services.power-profiles-daemon.enable = true;
+  # services.tlp.enable = false;
+  # qt5.platformTheme = "gnome";
+
   networking.hostName = "icarus";
   networking.hostId = "97d3b747";
 }
