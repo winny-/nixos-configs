@@ -15,6 +15,7 @@ with lib;
     ./cdrecord.nix
     ./mime.nix
     ./portal
+    ./vaapi.nix
   ];
 
   fileSystems."/backup" = {
@@ -158,6 +159,11 @@ with lib;
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
   '';
+
+  # https://nixos.wiki/wiki/Firefox#Tips_2 (touchscreen support)
+  environment.sessionVariables = {
+    MOZ_USE_XINPUT2 = "1";
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
