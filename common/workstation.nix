@@ -39,6 +39,7 @@ with lib;
     ];
   };
 
+  # XXX This should be adjustable.
   fileSystems."/tmp" = {
     fsType = "tmpfs";
     options = [
@@ -168,7 +169,9 @@ with lib;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    (emacsWithPackages [ emacsPackages.vterm ])
+    (emacsWithPackages
+      (with emacsPackages;
+        [ vterm ]))
     sqlite-interactive
 
     git
