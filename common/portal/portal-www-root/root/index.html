@@ -26,7 +26,13 @@
    body {
      background: #181818;
      color: #F2F2F2;
-     font-size: 2em;
+     font-size: 2rem;
+   }
+   article:not(:first-child) {
+     padding-top: 1rem;
+   }
+   input[type=text], button {
+     font-size: 1.4rem;
    }
    img {
      max-width: 5rem;
@@ -41,25 +47,56 @@
 </head>
 <body>
   <div id="content">
-    <a class="nohover" href="https://nixos.org/">
-      <img src="/nixos.svg" />
-    </a>
+    <article style="padding-top:.5em">
+      <form action="https://google.com/search" method="get">
+        <input type="text" placeholder="Google" name="q" />
+        <button>Search</button>
+      </form>
+    </article>
 
-    <form action="https://google.com/search" method="get">
-      <input type="text" placeholder="Google" name="q" />
-      <button>Search</button>
-    </form>
+    <article>
+      <h2>Service Dashboards</h2>
+      <ul>
+        <li><a href="/cups">CUPS</a></li>
+        <li><a href="/syncthing">Syncthing</a></li>
+        <li><a href="/netdata">Netdata</a></li>
+      </ul>
+    </article>
 
-    <h1>Service Dashboards</h1>
-    <ul>
-      <li><a href="/cups">CUPS</a></li>
-      <li><a href="/syncthing">Syncthing</a></li>
-      <li><a href="/netdata">Netdata</a></li>
-    </ul>
-    <h1>NixOS Helpers</h1>
-    <ul>
-      <li><a href="https://search.nixos.org/options">Options Search</a></li>
-      <li><a href="https://search.nixos.org/packages">Package Search</a></li>
-    </ul>
+    <article>
+      <h2>NixOS Helpers</h2>
+      <ul>
+        <li>
+          <form action="https://search.nixos.org/options" method="get">
+            <input type="text" placeholder="Options&hellip;" name="query" />
+            <button>Options Search</button>
+          </form>
+        </li>
+        <li>
+          <form action="https://search.nixos.org/packages" method="get">
+            <input type="text" placeholder="Package keywords&hellip;" name="query" />
+            <button>Package Search</button>
+          </form>
+        </li>
+        <li>
+          <form action="https://nixos.wiki/index.php?search=aa&go=Go">
+            <input type="text" placeholder="Some wiki topic&hellip;" name="search" />
+            <button>Wiki Search</button>
+            <input type="hidden" name="go" value="Go" />
+          </form>
+        </li>
+      </ul>
+    </article>
+
+    <article>
+      <h2>About</h2>
+      <p>
+        <a class="nohover" style="float:left" href="https://nixos.org/">
+          <img src="/nixos.svg" />
+        </a>
+        This homepage is authored by Winston (winny) Weinert.
+        <a href="https://gitlab.com/winny/nixos-configs">Config git repository</a>.
+      </p>
+    </article>
   </div>
 </body>
