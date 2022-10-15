@@ -132,15 +132,15 @@ with lib;
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.extraConfig = ''
+  # hardware.pulseaudio.extraConfig = ''
 
-    ################################################################
-    # from workstation.nix
-    ################################################################
+  #   ################################################################
+  #   # from workstation.nix
+  #   ################################################################
 
-    # Disable annoying audio click in/out when playback is paused temporarily.
-    unload-module module-suspend-on-idle
-  '';
+  #   # Disable annoying audio click in/out when playback is paused temporarily.
+  #   unload-module module-suspend-on-idle
+  # '';
   hardware.bluetooth.enable = true;
 
   # Theming
