@@ -107,6 +107,8 @@ with lib; {
 
     powertop
 
+    ncdu
+    procps
     htop
     glances
     mc
