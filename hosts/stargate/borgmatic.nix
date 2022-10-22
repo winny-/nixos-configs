@@ -41,6 +41,7 @@
     timerConfig = {
       Unit = "backup.service";
       OnCalendar = [ "*-*-* 04:00:00" ];
+      OnActiveSec=600;
     };
     wantedBy = [ "timers.target" ];
   };
