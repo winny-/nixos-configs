@@ -22,6 +22,46 @@
   # services.tlp.enable = false;
   # qt5.platformTheme = "gnome";
 
+  # BTRFS snapshots inspired by
+  # https://dataswamp.org/~solene/2022-10-07-nixos-btrfs-continuous-snapshots.html
+
+  services.btrbk.instances."daily" = {
+    onCalendar = "daily";
+    settings = {
+      snapshot_preserve_min = "7d";
+      volume."/" = {
+        subvolume = "home";
+        snapshot_dir = ".snapshots";
+      };
+    };
+  };
+
+  services.btrbk.instances."weekly" = {
+    onCalendar = "weekly";
+    settings = {
+      snapshot_preserve_min = "30d";
+      volume."/" = {
+        subvolume = "home";
+        snapshot_dir = ".snapshots";
+      };
+    };
+  };
+
+  services.btrbk.instances."frequently" = {
+    onCalendar = "*:0/15";
+    settings = {
+      snapshot_preserve_min = "1d";
+      volume."/" = {
+        subvolume = "home";
+        snapshot_dir = ".snapshots";
+      };
+    };
+  };
+
+  environment.systemPackages = with pkgs; [
+    compsize
+  ];
+
   networking.hostName = "icarus";
   networking.hostId = "97d3b747";
 }
