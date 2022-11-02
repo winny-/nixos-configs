@@ -1,7 +1,7 @@
 { ... }:
 {
   xdg.mime.defaultApplications =
-    let browser = "org.qutebrowser.qutebrowser.desktop";
+    let browser = "firefox.desktop";
         documentViewer = "org.pwmt.zathura.desktop";
         imageViewer = "org.xfce.ristretto.desktop";
     in {
