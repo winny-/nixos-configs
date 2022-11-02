@@ -129,18 +129,15 @@ with lib;
 
   services.ddccontrol.enable = true;
 
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  # hardware.pulseaudio.extraConfig = ''
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
 
-  #   ################################################################
-  #   # from workstation.nix
-  #   ################################################################
-
-  #   # Disable annoying audio click in/out when playback is paused temporarily.
-  #   unload-module module-suspend-on-idle
-  # '';
   hardware.bluetooth.enable = true;
 
   # Theming
