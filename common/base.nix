@@ -3,6 +3,7 @@ with lib; {
   imports = [
     ../package-overrides
     ./mosh.nix
+    ./tmp-as-tmpfs.nix
   ];
 
   hardware.enableAllFirmware = true;

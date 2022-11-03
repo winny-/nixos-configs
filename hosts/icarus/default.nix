@@ -64,4 +64,6 @@
 
   networking.hostName = "icarus";
   networking.hostId = "97d3b747";
+
+  my.tmp-as-tmpfs.enable = false;
 }
