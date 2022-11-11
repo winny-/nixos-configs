@@ -196,6 +196,7 @@ with lib;
     texlive.combined.scheme-full
 
     qrencode
+    zbar  # use zbarimg to parse qr codes from pictures
 
     # Image editing
     inkscape
