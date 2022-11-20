@@ -69,9 +69,13 @@ with lib; {
     tmux
     screen  # Serial terminals
 
+    # Replace busybox stuff.
     coreutils  # Avoid busybox rm and gain more features.
-    unixtools.procps  # Avoid busybox ps and watch.
+    ps
+    watch
+    sysctl
     usbutils  # Avoid busybox lsusb
+    util-linux
 
     fzf
 
@@ -109,7 +113,6 @@ with lib; {
     powertop
 
     ncdu
-    procps
     htop
     glances
     mc
