@@ -149,9 +149,7 @@ with lib;
   '';
 
   # https://nixos.wiki/wiki/Firefox#Tips_2 (touchscreen support)
-  environment.sessionVariables = {
-    MOZ_USE_XINPUT2 = "1";
-  };
+  environment.sessionVariables.MOZ_USE_XINPUT2 = "1";
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -266,6 +264,7 @@ with lib;
     postgresql
     pre-commit
     heroku
+    flyctl
     nodejs
     ghc
     ocaml
@@ -315,6 +314,10 @@ with lib;
     drawterm
     remmina
     unison
+
+    unrar
+    unzip
+    koreader
   ];
 
   # This value determines the NixOS release from which the default
