@@ -63,6 +63,18 @@ with lib; {
 
   environment.homeBinInPath = true;
 
+  environment.variables = {
+    # NixOS defaults to using your XDG_RUNTIME_DIR created by your
+    # systemd-logind session.  This is typically a tmpdir that grows to 10% of
+    # your RAM.
+    #
+    # This is not suitable as a temporary directory because tools such as
+    # nix-build will download large files to this tmpdir.  Prefer /tmp because
+    # the sysop can set up a large shared tmpfs or just use a filesystem on
+    # disk.  See also `tmp-as-tmpfs.nix` in this directory.
+    TMPDIR = "/tmp";
+  };
+
   environment.systemPackages = with pkgs; [
     tmux
     screen  # Serial terminals
