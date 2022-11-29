@@ -12,9 +12,7 @@ with lib; {
   time.timeZone = mkDefault "America/Chicago";
 
   nixpkgs.config.allowUnfree = true;
-  nix.extraOptions = ''
-      experimental-features = nix-command flakes
-  '';
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
