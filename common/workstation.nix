@@ -211,7 +211,8 @@ with lib;
     ffmpeg
     ffcast  # rofi-screenshot
     xorg.xwininfo # rofi-screenshot
-    mpv
+    (mpv.override { scripts = with mpvScripts; [ mpris ]; })
+    playerctl
     mediainfo
     zathura
     awesome
