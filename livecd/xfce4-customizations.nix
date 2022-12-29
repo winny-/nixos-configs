@@ -4,7 +4,7 @@
   imports = [
     <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-graphical-base.nix>
     <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
-    ../common/winston.nix
+    ../common/workstation.nix
   ];
 
   systemd.services.sshd.wantedBy = pkgs.lib.mkForce [ "multi-user.target" ];

@@ -30,7 +30,9 @@
     settings = {
       snapshot_preserve_min = "7d";
       volume."/" = {
-        subvolume = "home";
+        subvolume.home = {
+          snapshot_name = "daily";
+        };
         snapshot_dir = ".snapshots";
       };
     };
@@ -41,7 +43,9 @@
     settings = {
       snapshot_preserve_min = "30d";
       volume."/" = {
-        subvolume = "home";
+        subvolume.home = {
+          snapshot_name = "weekly";
+        };
         snapshot_dir = ".snapshots";
       };
     };
@@ -52,7 +56,9 @@
     settings = {
       snapshot_preserve_min = "1d";
       volume."/" = {
-        subvolume = "home";
+        subvolume.home = {
+          snapshot_name = "frequently";
+        };
         snapshot_dir = ".snapshots";
       };
     };
@@ -64,6 +70,8 @@
 
   networking.hostName = "icarus";
   networking.hostId = "97d3b747";
+  networking.bridges.br15.interfaces = [];
+  systemd.services.br15-netdev.wantedBy = ["libvirtd.service"];
 
   my.tmp-as-tmpfs.enable = false;
 }

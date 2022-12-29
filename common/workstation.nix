@@ -119,27 +119,32 @@ with lib;
 
   services.ddccontrol.enable = true;
 
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-  };
+  # Enable pipewire.
+  #
+  # Presently disabled because it intermittently stops playing sound on my
+  # laptop.
+  #
+  # security.rtkit.enable = true;
+  # services.pipewire = {
+  #   enable = true;
+  #   alsa.enable = true;
+  #   alsa.support32Bit = true;
+  #   pulse.enable = true;
+  #   jack.enable = true;
+  # };
 
-  # Enable sound.
+  # Enable pulseaudio.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
-  # hardware.pulseaudio.extraConfig = ''
+  hardware.pulseaudio.extraConfig = ''
 
-  #   ################################################################
-  #   # from workstation.nix
-  #   ################################################################
+    ################################################################
+    # from workstation.nix
+    ################################################################
 
-  #   # Disable annoying audio click in/out when playback is paused temporarily.
-  #   unload-module module-suspend-on-idle
-  # '';
+    # Disable annoying audio click in/out when playback is paused temporarily.
+    unload-module module-suspend-on-idle
+  '';
   hardware.bluetooth.enable = true;
 
   # Theming
