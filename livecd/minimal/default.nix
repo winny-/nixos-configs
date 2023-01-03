@@ -2,9 +2,7 @@
 
 {
   imports = [
-    <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-minimal-base.nix>
-    <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
-    ../common/base.nix
+    ../../common/base.nix
   ];
 
   systemd.services.sshd.wantedBy = pkgs.lib.mkForce [ "multi-user.target" ];

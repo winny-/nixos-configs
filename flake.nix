@@ -6,21 +6,35 @@
   };
 
   outputs = { self, nixpkgs, jhmod }@inputs:
+    with nixpkgs.lib;
     let
       hosts = builtins.attrNames (builtins.readDir ./hosts);
+      merged = (genAttrs hosts (hostName:
+              nixosSystem {
+                system = "x86_64-linux";
+                modules = [
+                  (./. + "/hosts/${hostName}")
+                  ({ ... }: {
+                    nix.registry.nixpkgs.flake = nixpkgs;
+                  })
+                ];
+                specialArgs = { inherit inputs; };
+              })) // {
+                livecd.minimal = nixosSystem {
+                  system = "x86_64-linux";
+                  modules = [
+                        "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+                        "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+                        ./livecd/minimal
+                    ({ ... }: {
+                      nix.registry.nixpkgs.flake = nixpkgs;
+                    })
+                  ];
+                  specialArgs = { inherit inputs; };
+                };
+              };
     in
       {
-        nixosConfigurations =
-          nixpkgs.lib.genAttrs hosts (hostName:
-            nixpkgs.lib.nixosSystem {
-              system = "x86_64-linux";
-              modules = [
-                (./. + "/hosts/${hostName}")
-                ({ ... }: {
-                  nix.registry.nixpkgs.flake = nixpkgs;
-                })
-              ];
-              specialArgs = { inherit inputs; };
-            });
+        nixosConfigurations = merged;
       };
 }
