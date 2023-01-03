@@ -16,6 +16,7 @@ with lib;
     ./mime.nix
     ./portal
     ./vaapi.nix
+    ./netdata.nix
   ];
 
   fileSystems."/backup" = {
@@ -37,11 +38,6 @@ with lib;
       "password=password"
       "ro"
     ];
-  };
-
-  services.netdata = {
-    enable = true;
-    python.enable = true;
   };
 
   services.xserver = {
