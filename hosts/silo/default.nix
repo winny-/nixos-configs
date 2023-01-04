@@ -1,13 +1,28 @@
 { config, pkgs, ... }:
 {
   imports = [
+    ./grafana.nix
     ./shares.nix
     ./hardware-configuration.nix
     ../../common/docker.nix
     ../../common/libvirtd.nix
     ../../common/netdata.nix
+    ../../common/borgmatic.nix
     ../../common/base.nix
   ];
+
+  my.borgmatic = {
+    enable = true;
+    hostname = "pcm86lii.repo.borgbase.com";
+    username = "pcm86lii";
+    directories = [
+      "/var/lib/nextcloud"
+      "/var/lib/jellyfin"
+      "/home"
+      "/root"
+      "/secrets"
+    ];
+  };
 
   boot.loader.grub = {
     enable = true;
@@ -109,6 +124,13 @@
       "nc.winny.tech" = {
         forceSSL = true;
         enableACME = true;
+      };
+      "silo.winny.tech" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          root = "/srv/www/silo.winny.tech/";
+        };
       };
     };
   };

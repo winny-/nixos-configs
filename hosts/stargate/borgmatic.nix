@@ -57,7 +57,7 @@
         - /home/*/.cache
         - '*/steamapps'
       repositories:
-        - tw8vh7jl@tw8vh7jl.repo.borgbase.com:repo
+        - tw8vh7jl@tw8vh7jl.repo.borgbase.com/./repo
       one_file_system: true
     retention:
       keep_daily: 7
