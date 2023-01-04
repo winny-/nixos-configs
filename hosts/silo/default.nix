@@ -60,25 +60,55 @@
     device = "naspool/multimedia/music";
     fsType = "zfs";
   };
-
-  services.jellyfin = {
-    enable = true;
+  fileSystems."/var/lib/nextcloud" = {
+    device = "naspool/data/nextcloud";
+    fsType = "zfs";
   };
-  networking.firewall.allowedTCPPorts = [ 80 ];
+  services.nextcloud = {
+    enable = true;
+    hostName = "nc.winny.tech";
+    https = true;
+    package = pkgs.nextcloud25;
+    config.adminpassFile = "/secrets/nextcloud/adminpass";
+    enableBrokenCiphersForSSE = false;
+  };
+
+  services.jellyfin.enable = true;
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "letsencrypt@winny.tech";
+  };
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
   services.nginx = {
     enable = true;
     virtualHosts = {
-      public = {
-        serverName = "silo.lan";
+      "jellyfin.winny.tech" = {
+        forceSSL = true;
+        enableACME = true;
         root = "/var/empty";
         locations."/" = {
           proxyPass = "http://localhost:8096/";
 	  recommendedProxySettings = true;
+          extraConfig = ''
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection $connection_upgrade;
+          '';
         };
-        locations."/netdata" = {
-	  recommendedProxySettings = true;
+      };
+      "netdata.silo.home.winny.tech" = {
+        serverAliases = [ "netdata.silo" ];
+        locations."/" = {
+          recommendedProxySettings = true;
 	  proxyPass = "http://localhost:19999/";
-	};
+          extraConfig = ''
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection $connection_upgrade;
+          '';
+        };
+      };
+      "nc.winny.tech" = {
+        forceSSL = true;
+        enableACME = true;
       };
     };
   };
