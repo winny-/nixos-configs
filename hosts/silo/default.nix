@@ -35,7 +35,7 @@
     mirroredBoots = [
       {
         path = "/boot2";
-	devices = ["/dev/disk/by-id/ata-CT120BX500SSD1_1943E3D1AC4B"];
+        devices = ["/dev/disk/by-id/ata-CT120BX500SSD1_1943E3D1AC4B"];
       }
     ];
   };
@@ -107,7 +107,7 @@
         root = "/var/empty";
         locations."/" = {
           proxyPass = "http://localhost:8096/";
-	  recommendedProxySettings = true;
+          recommendedProxySettings = true;
           extraConfig = ''
             proxy_set_header Upgrade $http_upgrade;
             proxy_set_header Connection $connection_upgrade;
@@ -118,7 +118,7 @@
         serverAliases = [ "netdata.silo" ];
         locations."/" = {
           recommendedProxySettings = true;
-	  proxyPass = "http://localhost:19999/";
+          proxyPass = "http://localhost:19999/";
           extraConfig = ''
             proxy_set_header Upgrade $http_upgrade;
             proxy_set_header Connection $connection_upgrade;
