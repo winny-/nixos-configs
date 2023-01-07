@@ -22,6 +22,10 @@
       "/root"
       "/secrets"
     ];
+    exclude = [
+      ".cache/*"
+      "/var/lib/jellyfin/transcodes/*"
+    ];
   };
 
   boot.loader.grub = {
@@ -130,6 +134,23 @@
         enableACME = true;
         locations."/" = {
           root = "/srv/www/silo.winny.tech/";
+        };
+        locations."/transmission/" = {
+          root = "/var/empty";
+
+          # This is "secure" because I don't mirror the built derivations
+          # anywhere or allow other users to log into this server.  The
+          # password should be world readable so I wouldn't depend on this for
+          # anything too serious.
+          basicAuth.transmission = builtins.readFile "/secrets/transmission/basic_auth";
+
+          recommendedProxySettings = true;
+          proxyPass = "http://192.168.122.192:9091/transmission/";
+          extraConfig = ''
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection $connection_upgrade;
+            proxy_pass_request_headers on;
+          '';
         };
       };
     };
