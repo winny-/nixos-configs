@@ -7,6 +7,21 @@
     ../../common/networkmanager.nix
   ];
 
+  users.motd = ''
+
+      ____
+     /___/\_
+    _\   \/_/\__   Welcome to icarus.
+  __\       \/_/\
+  \   __    __ \ \
+ __\  \_\   \_\ \ \   __
+/_/\\   __   __  \ \_/_/\
+\_\/_\__\/\__\/\__\/_\_\/
+   \_\/_/\       /_\_\/
+      \_\/       \_\/
+
+  '';
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

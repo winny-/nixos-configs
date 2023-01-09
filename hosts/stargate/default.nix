@@ -10,6 +10,30 @@
     ./hardware-configuration.nix
   ];
 
+  users.motd = ''
+
+            ______             ______
+              o__.‘\_.-"V"-._/’.__o
+            _O/  \.'_\”   “/_`./  \O_
+                 //           \\
+    Welcome     |>             <|
+      to        ||             ||
+    stargate!   ||_           _||
+                 \/\         /\/
+                  `._/|____|\_.'
+                     `-....-'
+                  --//::::::\\--
+                  |//::::::::\\|
+                 \//::::::::::\\/
+                \//::::::::::::\\/
+         /     \ |--------------| /      \
+    /-||-\    \  /……………………………………\  /     /-||-\
+    |_//_|   \  |----------------|  /    |_\\_|
+     //|    \                        /     |\\
+       |   ////////////////////////////    |
+
+  '';
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
