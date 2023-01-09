@@ -50,7 +50,7 @@
         Which directories to back up.
       '';
     };
-    my.borgmatic.exclude = mkOption {
+    my.borgmatic.excludes = mkOption {
       default = [];
       type = listOf str;
       description = ''
@@ -63,7 +63,7 @@
     cfg = config.my.borgmatic;
     # N.B. this should generate valid YAML because YAML is 99.999% a superset of JSON.
     source_directories = concatStringsSep ", " (map builtins.toJSON cfg.directories);
-    exclude_patterns = concatStringsSep ", " (map builtins.toJSON cfg.exclude);
+    exclude_patterns = concatStringsSep ", " (map builtins.toJSON cfg.excludes);
   in {
     systemd.services."generate-borgmatic-secrets" = {
       enable = cfg.enable;

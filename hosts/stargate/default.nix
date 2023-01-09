@@ -5,7 +5,7 @@
     ../../common/workstation.nix
     ../../common/mpd.nix
     ../../common/networkmanager.nix
-    ./borgmatic.nix
+    ../../common/borgmatic.nix
     ./ups.nix
     ./hardware-configuration.nix
   ];
@@ -33,6 +33,14 @@
        |   ////////////////////////////    |
 
   '';
+
+  my.borgmatic = {
+    enable = true;
+    username = "tw8vh7jl";
+    hostname = "tw8vh7jl.repo.borgbase.com";
+    directories = ["/home" "/root" "/secrets"];
+    excludes = ["/root/.cache" "/home/*/.cache" "*/steamapps"];
+  };
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
