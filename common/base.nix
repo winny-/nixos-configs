@@ -4,6 +4,7 @@ with lib; {
     ../package-overrides
     ./mosh.nix
     ./tmp-as-tmpfs.nix
+    ./bare-metal.nix
   ];
 
   hardware.enableAllFirmware = true;
