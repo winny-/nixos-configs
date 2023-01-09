@@ -38,5 +38,10 @@ with lib; {
         '';
       })
     ];
+
+    # Direct users to the system local instance instead of the user session
+    # instance.  (It is generally not productive to use a session instance due to
+    # limited permissions and possible network configurations.)
+    environment.variables.LIBVIRT_DEFAULT_URI = "qemu:///system";
   };
 }
