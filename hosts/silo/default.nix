@@ -37,7 +37,7 @@
       "/root"
       "/secrets"
     ];
-    exclude = [
+    excludes = [
       ".cache/*"
       "/var/lib/jellyfin/transcodes/*"
     ];
@@ -158,12 +158,11 @@
           # password should be world readable so I wouldn't depend on this for
           # anything too serious.
           basicAuth.transmission = builtins.readFile "/secrets/transmission/basic_auth";
+          proxyPass = "http://192.168.122.192:9091/transmission/";
 
           recommendedProxySettings = true;
-          proxyPass = "http://192.168.122.192:9091/transmission/";
+          proxyWebsockets = true;
           extraConfig = ''
-            proxy_set_header Upgrade $http_upgrade;
-            proxy_set_header Connection $connection_upgrade;
             proxy_pass_request_headers on;
           '';
         };
