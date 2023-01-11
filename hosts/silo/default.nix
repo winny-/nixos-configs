@@ -105,6 +105,15 @@
     package = pkgs.nextcloud25;
     config.adminpassFile = "/secrets/nextcloud/adminpass";
     enableBrokenCiphersForSSE = false;
+
+    # Setup tuning recommendations from nc admin dashboard.
+    phpOptions."opcache.interned_strings_buffer" = "16";
+    config.defaultPhoneRegion = "US";
+  };
+  # TODO migrate nextcloud sqlite to mysql.
+  services.mysql = {
+    enable = true;
+    package = pkgs.mariadb;
   };
 
   services.jellyfin.enable = true;
