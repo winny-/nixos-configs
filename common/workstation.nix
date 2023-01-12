@@ -216,6 +216,8 @@ with lib;
 
     openvpn
 
+    spaceFM  # OFM
+    nsxiv  # Hopefully better than Ristretto.
     deadbeef-with-plugins
     pavucontrol
     obs-studio
