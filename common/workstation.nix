@@ -26,7 +26,7 @@ with lib;
   };
 
   fileSystems."/mnt/multimedia" = {
-    device = "//silo.lan/multimedia";
+    device = "//silo.home.winny.tech/multimedia";
     fsType = "cifs";
     options = [
       "x-systemd.automount"
