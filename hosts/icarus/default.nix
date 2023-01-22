@@ -2,6 +2,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../common/borgmatic.nix
     ../../common/workstation.nix
     ../../common/laptop.nix
     ../../common/networkmanager.nix
@@ -89,4 +90,15 @@
   systemd.services.br15-netdev.wantedBy = ["libvirtd.service"];
 
   my.tmp-as-tmpfs.enable = false;
+
+
+  # Same repository as stargate.
+  my.borgmatic = {
+    enable = true;
+    username = "tw8vh7jl";
+    hostname = "tw8vh7jl.repo.borgbase.com";
+    directories = ["/home" "/root" "/secrets"];
+    excludes = ["/root/.cache" "/home/*/.cache" "*/steamapps"];
+  };
+
 }
