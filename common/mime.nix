@@ -10,10 +10,15 @@
     let browser = "firefox.desktop";
         documentViewer = "org.pwmt.zathura.desktop";
         imageViewer = "org.xfce.ristretto.desktop";
+        emailClient = "thunderbird.desktop";
     in {
       "application/pdf" = documentViewer;
       "x-scheme-handler/http" = browser;
       "x-scheme-handler/https" = browser;
+      "x-scheme-handler/mailto" = emailClient;
+      "message/rfc822" = emailClient;
+      "text/calendar" = emailClient;
+      "text/x-vcard" = emailClient;
       "text/html" = browser;
       "image/jpeg" = imageViewer;
       "image/png" = imageViewer;
