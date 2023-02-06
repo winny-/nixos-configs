@@ -85,10 +85,6 @@
     options = [ "ro" ];
   };
 
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-
-  boot.kernelPackages = pkgs.linuxPackages_5_10;
-
   # my.libvirtd.interfaces.primary = "enp39s0";
 
   # This value determines the NixOS release from which the default
