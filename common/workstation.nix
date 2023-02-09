@@ -275,6 +275,7 @@ with lib;
     # Coding stuff
     dbeaver
     racket
+    hadolint
     python3
     virtualenv
     postgresql
