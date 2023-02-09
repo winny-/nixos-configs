@@ -3,9 +3,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/release-22.11";
     jhmod.url = "github:sector-f/jhmod/4470eba57f3c3969ab04ef1be1dbf761be5a2c0f";
+    flake-utils.url = "github:numtide/flake-utils/6ee9ebb6b1ee695d2cacc4faa053a7b9baa76817";
   };
 
-  outputs = { self, nixpkgs, jhmod }@inputs:
+  outputs = { self, nixpkgs, jhmod, flake-utils }@inputs:
     with nixpkgs.lib;
     let
       hosts = builtins.attrNames (builtins.readDir ./hosts);
@@ -36,5 +37,13 @@
     in
       {
         nixosConfigurations = merged;
+        apps.repl = flake-utils.lib.mkApp {
+          drv = pkgs.writeShellScriptBin "repl" ''
+            confnix=$(mktemp)
+            echo "builtins.getFlake (toString $(git rev-parse --show-toplevel))" >$confnix
+            trap "rm $confnix" EXIT
+            nix repl $confnix
+          '';
+        };
       };
 }
