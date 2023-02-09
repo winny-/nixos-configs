@@ -1,0 +1,1 @@
+../../../p/dotfiles/modules/mpv/image/.config/mpv/scripts/announce-change.lua

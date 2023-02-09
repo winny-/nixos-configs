@@ -1,0 +1,1 @@
+p/dotfiles/modules/bash/image/.bashrc

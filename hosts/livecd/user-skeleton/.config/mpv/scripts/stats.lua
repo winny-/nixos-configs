@@ -1,0 +1,1 @@
+../../../p/dotfiles/modules/mpv/image/.config/mpv/scripts/stats.lua

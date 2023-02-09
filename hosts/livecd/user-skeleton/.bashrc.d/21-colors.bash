@@ -1,0 +1,1 @@
+../p/dotfiles/modules/bash/image/.bashrc.d/21-colors.bash

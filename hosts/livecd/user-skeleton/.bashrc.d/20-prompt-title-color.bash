@@ -1,0 +1,1 @@
+../p/dotfiles/modules/bash/image/.bashrc.d/20-prompt-title-color.bash

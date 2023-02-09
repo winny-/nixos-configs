@@ -1,0 +1,1 @@
+../p/dotfiles/modules/bash/image/.bashrc.d/10-histverify.bash

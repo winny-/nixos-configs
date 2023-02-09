@@ -19,7 +19,7 @@
   };
   security.pam.services.login.makeHomeDir = true;
   security.pam.services.lightdm.makeHomeDir = true;
-  security.pam.makeHomeDir.skelDirectory = "${./user-skeleton}"
+  security.pam.makeHomeDir.skelDirectory = "${./user-skeleton}";
 
   isoImage.edition = "xfce";
 }

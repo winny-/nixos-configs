@@ -1,0 +1,6 @@
+[submodule "hosts/livecd/user-skeleton/p/dotfiles"]
+	path = hosts/livecd/user-skeleton/p/dotfiles
+	url = https://gitlab.com/winny/dotfiles.git
+[submodule "hosts/livecd/user-skeleton/.emacs.d"]
+	path = hosts/livecd/user-skeleton/.emacs.d
+	url = https://github.com/winny-/emacs.d.git

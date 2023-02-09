@@ -1,0 +1,1 @@
+../../../../p/dotfiles/modules/qutebrowser/image/.local/share/qutebrowser/greasemonkey/mediawiki-sidebar-toggle.js
