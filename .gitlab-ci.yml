@@ -3,6 +3,6 @@ precommit:
   image: debian:bullseye-slim
   before_script:
     - apt update
-    - apt install -y --no-install-recommends pre-commit
+    - apt install -y --no-install-recommends pre-commit git
   script:
     - pre-commit run -a
