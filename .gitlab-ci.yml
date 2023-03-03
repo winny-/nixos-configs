@@ -1,0 +1,8 @@
+---
+precommit:
+  image: debian:bullseye-slim
+  before_script:
+    - apt update
+    - apt install -y --no-install-recommends pre-commit
+  script:
+    - pre-commit run -a
