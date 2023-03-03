@@ -2,7 +2,7 @@
   description = "Winny's NixOS Configurations";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/release-22.11";
-    jhmod.url = "github:sector-f/jhmod/4470eba57f3c3969ab04ef1be1dbf761be5a2c0f";
+    jhmod.url = "github:sector-f/jhmod/7fad6e157d27b931763da9ebdc2c23f4c4270085";
     flake-utils.url = "github:numtide/flake-utils/6ee9ebb6b1ee695d2cacc4faa053a7b9baa76817";
   };
 
