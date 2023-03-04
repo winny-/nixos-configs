@@ -63,6 +63,14 @@
     "console=tty1"
   ];
 
+  # ssh -p 2222 root@slio
+  # ~ # zfs load-key -a
+  # Enter passphrase for 'rpool':
+  # 1 / 1 key(s) successfully loaded
+  # ~ # pkill zfs
+  # (You'll lose access to the server at this time because the sshd stops and
+  # boot continues.)
+
   boot.initrd = {
     availableKernelModules = ["igb" "e1000e"];
     network = {
