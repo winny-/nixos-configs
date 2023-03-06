@@ -30,8 +30,8 @@
       },
       "original": {
         "owner": "sector-f",
-        "ref": "v0.0.1",
         "repo": "jhmod",
+        "rev": "7fad6e157d27b931763da9ebdc2c23f4c4270085",
         "type": "github"
       }
     },
