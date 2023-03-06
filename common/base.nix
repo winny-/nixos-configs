@@ -93,6 +93,8 @@ with lib; {
     sysctl
     usbutils  # Avoid busybox lsusb
     util-linux
+    bc
+    unzip
 
     fzf
 
