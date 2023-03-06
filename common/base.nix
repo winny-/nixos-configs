@@ -14,6 +14,12 @@ with lib; {
 
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.gc = {
+    automatic = true;
+    randomizedDelaySec = "45min";
+    dates = "monthly";
+    options = "--delete-older-than 30d";
+  };
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
