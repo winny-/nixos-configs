@@ -95,6 +95,7 @@
     hostname = "tw8vh7jl.repo.borgbase.com";
     directories = ["/home" "/root" "/secrets"];
     excludes = ["/root/.cache" "/home/*/.cache" "*/steamapps"];
+    calendar = [ "*-*-* 17:00:00" ];
   };
 
 }

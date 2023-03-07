@@ -57,6 +57,13 @@
         Glob patterns to exclude from backup.
       '';
     };
+    my.borgmatic.calendar = mkOption {
+      default = [ "*-*-* 04:00:00" ];
+      type = listOf str;
+      description = ''
+        The OnCalendar value for the backup timer.
+      '';
+    };
   };
 
   config = with lib; let
@@ -101,11 +108,10 @@
       '';
     };
 
-    systemd.timers.daily-backup = {
+    systemd.timers.backup = {
       enable = cfg.enable;
       timerConfig = {
-        Unit = "backup.service";
-        OnCalendar = [ "*-*-* 04:00:00" ];
+        OnCalendar = cfg.calendar;
         OnActiveSec=600;
       };
       wantedBy = [ "timers.target" ];
