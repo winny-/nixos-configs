@@ -80,17 +80,13 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    compsize
-  ];
-
   networking.hostName = "icarus";
   networking.hostId = "97d3b747";
   networking.bridges.br15.interfaces = [];
   systemd.services.br15-netdev.wantedBy = ["libvirtd.service"];
 
   my.tmp-as-tmpfs.enable = false;
-
+  my.btrfs.enable = true;
 
   # Same repository as stargate.
   my.borgmatic = {

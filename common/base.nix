@@ -5,11 +5,12 @@ with lib; {
     ./mosh.nix
     ./tmp-as-tmpfs.nix
     ./bare-metal.nix
+    ./zfs.nix
+    ./btrfs.nix
   ];
 
   hardware.enableAllFirmware = true;
 
-  services.zfs.autoSnapshot.enable = mkDefault config.boot.zfs.enabled;
   time.timeZone = mkDefault "America/Chicago";
 
   nixpkgs.config.allowUnfree = true;

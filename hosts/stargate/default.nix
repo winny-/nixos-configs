@@ -41,12 +41,11 @@
     directories = ["/home" "/root" "/secrets"];
     excludes = ["/root/.cache" "/home/*/.cache" "*/steamapps"];
   };
+  my.zfs.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  boot.supportedFilesystems = [ "zfs" ];
 
   networking.hostName = "stargate";
   networking.hostId = "180b60c6";

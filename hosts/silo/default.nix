@@ -90,6 +90,7 @@
   networking.hostId = "9ea35398";
   networking.interfaces.eno1.useDHCP = true;
 
+  my.zfs.enable = true;
   fileSystems."/multimedia" = {
     device = "naspool/multimedia";
     fsType = "zfs";
