@@ -1,5 +1,6 @@
 { config, ... }:
 {
+  services.nginx.statusPage = true;
   services.prometheus = {
     enable = true;
     exporters = {
@@ -8,12 +9,22 @@
         enabledCollectors = [ "systemd" ];
         port = 9002;
       };
+      zfs.enable = true;
+      systemd.enable = true;
+      smartctl.enable = true;
+      nginx.enable = true;
     };
     scrapeConfigs = [
       {
         job_name = "silo";
         static_configs = [{
-          targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}"];
+          targets = [
+            "127.0.0.1:${toString config.services.prometheus.exporters.node.port}"
+            "127.0.0.1:${toString config.services.prometheus.exporters.zfs.port}"
+            "127.0.0.1:${toString config.services.prometheus.exporters.systemd.port}"
+            "127.0.0.1:${toString config.services.prometheus.exporters.smartctl.port}"
+            "127.0.0.1:${toString config.services.prometheus.exporters.nginx.port}"
+          ];
         }];
       }
       {
