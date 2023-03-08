@@ -16,6 +16,18 @@
           targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}"];
         }];
       }
+      {
+        job_name = "toybox";
+        static_configs = [{
+          targets = [ "toybox.home.winny.tech:9182" ];
+        }];
+      }
+      {
+        job_name = "styx";
+        static_configs = [{
+          targets = [ "styx.home.winny.tech:9100" ];
+        }];
+      }
     ];
   };
 
@@ -44,4 +56,23 @@
       '';
     };
   };
+  services.nginx.virtualHosts."prometheus.winny.tech" = {
+    forceSSL = true;
+    enableACME = true;
+    root = "/var/empty";
+    # This is "secure" because I don't mirror the built derivations
+    # anywhere or allow other users to log into this server.  The
+    # password should be world readable so I wouldn't depend on this for
+    # anything too serious.
+    basicAuth.prometheus = builtins.readFile "/secrets/prometheus/basic_auth";
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:${toString config.services.prometheus.port}/";
+      recommendedProxySettings = true;
+      proxyWebsockets = true;
+      extraConfig = ''
+        proxy_pass_request_headers on;
+      '';
+    };
+  };
+
 }
