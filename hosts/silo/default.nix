@@ -131,46 +131,20 @@
     defaults.email = "letsencrypt@winny.tech";
   };
   networking.firewall.allowedTCPPorts = [ 80 443 ];
+  services.gotify = {
+    enable = true;
+    port = 60717;
+  };
   services.nginx = {
     enable = true;
-    virtualHosts = {
-      "jellyfin.winny.tech" = {
-        forceSSL = true;
-        enableACME = true;
-        root = "/var/empty";
-        locations."/" = {
-          proxyPass = "http://localhost:8096/";
-          recommendedProxySettings = true;
-          extraConfig = ''
-            proxy_set_header Upgrade $http_upgrade;
-            proxy_set_header Connection $connection_upgrade;
-          '';
-        };
-      };
-      "netdata.silo.home.winny.tech" = {
-        serverAliases = [ "netdata.silo" ];
-        locations."/" = {
-          recommendedProxySettings = true;
-          proxyPass = "http://localhost:19999/";
-          extraConfig = ''
-            proxy_set_header Upgrade $http_upgrade;
-            proxy_set_header Connection $connection_upgrade;
-          '';
-        };
-      };
-      "nc.winny.tech" = {
-        forceSSL = true;
-        enableACME = true;
-      };
-      "silo.winny.tech" = {
-        forceSSL = true;
-        enableACME = true;
+    virtualHosts = let
+      siloWithSSL = useSSL: {
+        forceSSL = useSSL;
+        enableACME = useSSL;
         locations."/" = {
           root = "/srv/www/silo.winny.tech/";
         };
         locations."/transmission/" = {
-          root = "/var/empty";
-
           # This is "secure" because I don't mirror the built derivations
           # anywhere or allow other users to log into this server.  The
           # password should be world readable so I wouldn't depend on this for
@@ -184,6 +158,41 @@
             proxy_pass_request_headers on;
           '';
         };
+      };
+      proxyPass = url: {
+          recommendedProxySettings = true;
+          proxyPass = url;
+          extraConfig = ''
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection $connection_upgrade;
+          '';
+      };
+    in {
+      "default" =  {
+        default = true;
+        extraConfig = ''
+          return 302 https://silo.winny.tech/;
+        '';
+      };
+      "jellyfin.winny.tech" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = proxyPass "http://localhost:8096/";
+      };
+      "netdata.silo.home.winny.tech" = {
+        serverAliases = [ "netdata.silo" ];
+        locations."/" = proxyPass "http://localhost:19999/";
+      };
+      "nc.winny.tech" = {
+        forceSSL = true;
+        enableACME = true;
+      };
+      "silo.winny.tech" = siloWithSSL true;
+      "silo.home.winny.tech" = siloWithSSL false;
+      "gotify.winny.tech" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = proxyPass "http://localhost:60717/";
       };
     };
   };
