@@ -140,6 +140,7 @@ with lib; {
     ddrescue
     cryptsetup  # Sometimes I manually mount stuff so ensure cryptsetup is
                 # always available
+    gotify-cli
     gnupg
     acpi
     sysstat
