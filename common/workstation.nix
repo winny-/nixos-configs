@@ -279,6 +279,7 @@ with lib;
     postgresql
     pre-commit
     heroku
+    vultr-cli
     flyctl
     nodejs
     ghc
