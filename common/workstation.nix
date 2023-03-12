@@ -157,9 +157,7 @@ with lib;
   '';
 
   programs.light.enable = true;
-  services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
-  '';
+  users.users.winston.extraGroups = [ "video" ];
 
   # https://nixos.wiki/wiki/Firefox#Tips_2 (touchscreen support)
   environment.sessionVariables.MOZ_USE_XINPUT2 = "1";
