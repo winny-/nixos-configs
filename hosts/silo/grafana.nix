@@ -16,6 +16,10 @@
       systemd.enable = true;
       smartctl.enable = true;
       nginx.enable = true;
+      blackbox = {
+        enable = true;
+        configFile = ./blackbox_exporter.yml;
+      };
     };
     scrapeConfigs = [
       {
@@ -41,6 +45,60 @@
         job_name = "styx";
         static_configs = [{
           targets = [ "styx.home.winny.tech:9100" ];
+        }];
+      }
+      {
+        job_name = "blackbox-http";
+        metrics_path = "/probe";
+        scrape_timeout = "15s";
+        scrape_interval = "15s";
+        params.module = ["http_2xx"];
+        static_configs = [{
+          targets = [
+            "https://winny.tech"
+            "https://blog.winny.tech"
+            "https://gallery.winny.tech"
+            "https://ircbox.winny.tech"
+            "https://nc.winny.tech"
+            "https://grafana.winny.tech"
+          ];
+        }];
+        relabel_configs = [{
+          source_labels = [ "__address__" ];
+          target_label = "__param_target";
+        } {
+          source_labels = [ "__param_target"];
+          target_label = "instance";
+        } {
+          target_label = "__address__";
+          replacement = "127.0.0.1:${toString config.services.prometheus.exporters.blackbox.port}";
+        }];
+      }
+      {
+        job_name = "blackbox-icmp";
+        metrics_path = "/probe";
+        scrape_timeout = "15s";
+        scrape_interval = "15s";
+        params.module = ["icmp"];
+        static_configs = [{
+          targets = [
+            "styx.home.winny.tech"
+            "silo.home.winny.tech"
+            "acheron.home.winny.tech"
+            "printer.home.winny.tech"
+            "wifi.home.winny.tech"
+            "ircbox.winny.tech"
+          ];
+        }];
+        relabel_configs = [{
+          source_labels = [ "__address__" ];
+          target_label = "__param_target";
+        } {
+          source_labels = [ "__param_target"];
+          target_label = "instance";
+        } {
+          target_label = "__address__";
+          replacement = "127.0.0.1:${toString config.services.prometheus.exporters.blackbox.port}";
         }];
       }
     ];
