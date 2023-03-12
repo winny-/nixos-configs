@@ -6,7 +6,10 @@
     exporters = {
       node = {
         enable = true;
-        enabledCollectors = [ "systemd" ];
+        enabledCollectors = [
+          "systemd"
+          "processes"
+        ];
         port = 9002;
       };
       zfs.enable = true;
@@ -24,6 +27,7 @@
             "127.0.0.1:${toString config.services.prometheus.exporters.systemd.port}"
             "127.0.0.1:${toString config.services.prometheus.exporters.smartctl.port}"
             "127.0.0.1:${toString config.services.prometheus.exporters.nginx.port}"
+            "127.0.0.1:${toString config.services.grafana.settings.server.http_port}"
           ];
         }];
       }
@@ -44,8 +48,15 @@
 
   services.grafana = {
     enable = true;
-    settings.server = {
-      http_port = 3001;
+    settings = {
+      server.http_port = 3001;
+      "auth.anonymous" = {
+        enabled = "true";
+        org_name = "winny.tech";
+        org_role = "Viewer";
+        hide_version = "true";
+      };
+      metrics.enabled = "true";
     };
     provision.datasources.settings.datasources = [{
       url = "http://127.0.0.1:${toString config.services.prometheus.port}";
