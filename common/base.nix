@@ -10,6 +10,7 @@ with lib; {
   ];
 
   hardware.enableAllFirmware = true;
+  services.earlyoom.enable = mkDefault true;
 
   time.timeZone = mkDefault "America/Chicago";
 
