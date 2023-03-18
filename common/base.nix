@@ -7,6 +7,7 @@ with lib; {
     ./bare-metal.nix
     ./zfs.nix
     ./btrfs.nix
+    ./emacs.nix
   ];
 
   hardware.enableAllFirmware = true;
@@ -103,8 +104,7 @@ with lib; {
     nano
     ed
     vim
-    mg
-    # emacs-nox
+    config.my.emacs-package
     ispell  # Emacs needs this for flyspell.
 
     git
