@@ -182,7 +182,6 @@ with lib; {
     inetutils
     mtr
     iperf
-    ghidra
     binwalk
     openssl
     speedtest-cli

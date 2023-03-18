@@ -284,6 +284,8 @@ with lib;
 
     virt-manager
 
+    ghidra
+
     # Utilities
     gparted
     latencytop
