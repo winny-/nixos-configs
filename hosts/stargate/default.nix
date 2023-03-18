@@ -66,6 +66,11 @@
     fsType = "ext4";
   };
 
+  fileSystems."/vm" = {
+    device = "/dev/Green/VM";
+    fsType = "ext4";
+  };
+
   fileSystems."/gentoo" = {
     device = "/dev/Green/Gentoo_Root";
     fsType = "ext4";
