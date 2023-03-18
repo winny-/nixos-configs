@@ -126,6 +126,7 @@
   };
 
   services.jellyfin.enable = true;
+  users.users.jellyfin.extraGroups = [ "video" ];
   security.acme = {
     acceptTerms = true;
     defaults.email = "letsencrypt@winny.tech";
