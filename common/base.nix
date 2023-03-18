@@ -107,9 +107,17 @@ with lib; {
     config.my.emacs-package
     ispell  # Emacs needs this for flyspell.
 
+    sqlite-interactive
+
+    pre-commit
+
     git
     git-ignore
     git-lfs
+    git-crypt
+
+    jq
+    yq
 
     lynx
     links2
@@ -169,5 +177,31 @@ with lib; {
 
     man-pages
     man-pages-posix
+
+    # Network utilities and diagnostics
+    inetutils
+    mtr
+    iperf
+    ghidra
+    binwalk
+    openssl
+    speedtest-cli
+    httpie
+    wget
+    tcpdump
+    bind
+    bridge-utils
+    ethtool
+    wgetpaste
+    socat
+    busybox  # For httpd.
+    wol
+    squashfsTools
+
+    # Software diagnostics
+    gdb
+    ltrace
+    strace
+    config.boot.kernelPackages.perf
   ];
 }

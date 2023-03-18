@@ -169,20 +169,12 @@ with lib;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    sqlite-interactive
-
-    git
-    git-crypt
-
     # HTTP clients
     qutebrowser
     tor-browser-bundle-bin
     firefox
 
     sacc
-
-    jq
-    yq
 
     # Correspondence
     thunderbird
@@ -289,35 +281,8 @@ with lib;
 
     glab
     gh
-    pre-commit
 
     virt-manager
-
-    # Network utilities and diagnostics
-    inetutils
-    mtr
-    iperf
-    ghidra
-    binwalk
-    openssl
-    speedtest-cli
-    httpie
-    wget
-    tcpdump
-    bind
-    bridge-utils
-    ethtool
-    wgetpaste
-    socat
-    busybox  # For httpd.
-    wol
-    squashfsTools
-
-    # Software diagnostics
-    gdb
-    ltrace
-    strace
-    config.boot.kernelPackages.perf
 
     # Utilities
     gparted
