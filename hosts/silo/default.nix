@@ -26,6 +26,24 @@
 
   '';
 
+  # services.openssh.extraConfig = ''
+  #   Match User backup-toybox
+  #     ChrootDirectory /backup/toybox
+  #     ForceCommand internal-sftp
+  #     AllowTcpForwarding no
+  # '';
+
+  users.users.backup-toybox = {
+    isNormalUser = true;
+    home = "/backup/toybox";
+    group = "backup-toybox";
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGCl+ygtq5VGhKoyGwjbzHQlGsA1G8Icnl0RgLH2Hypq toybox backup"
+    ];
+    shell = pkgs.bashInteractive;
+  };
+  users.groups.backup-toybox = {};
+
   my.borgmatic = {
     enable = true;
     hostname = "pcm86lii.repo.borgbase.com";
@@ -87,6 +105,7 @@
   services.openssh.ports = [ 22 9998 ];
 
   networking.hostName = "silo";
+  networking.domain = "winny.tech";
   networking.hostId = "9ea35398";
   networking.interfaces.eno1.useDHCP = true;
 
@@ -105,6 +124,18 @@
   };
   fileSystems."/var/lib/nextcloud" = {
     device = "naspool/data/nextcloud";
+    fsType = "zfs";
+  };
+  fileSystems."/backup" = {
+    device = "naspool/backup";
+    fsType = "zfs";
+  };
+  fileSystems."/backup/bulk" = {
+    device = "naspool/backup/bulk";
+    fsType = "zfs";
+  };
+  fileSystems."/backup/toybox" = {
+    device = "naspool/backup/toybox";
     fsType = "zfs";
   };
   services.nextcloud = {
@@ -197,7 +228,6 @@
       };
     };
   };
-
 
   system.stateVersion = "22.05";
 }
