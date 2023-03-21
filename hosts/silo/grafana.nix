@@ -1,5 +1,96 @@
-{ config, ... }:
+# This configuration borrows largely from this wonderful blog post:
+#
+# https://xeiaso.net/blog/prometheus-grafana-loki-nixos-2020-11-20
+#
+
+{ config, lib, ... }:
 {
+  services.loki = {
+    enable = true;
+    configuration = {
+      auth_enabled = false;
+      server.http_listen_port = 3030;
+      ingester = {
+        lifecycler = {
+          address = "[::]";
+          ring = {
+            kvstore.store = "inmemory";
+            replication_factor = 1;
+          };
+          final_sleep = "0s";
+        };
+        chunk_idle_period = "1h";
+        max_chunk_age = "1h";
+        chunk_target_size = 1048576;
+        chunk_retain_period = "30s";
+        max_transfer_retries = 0;
+      };
+      schema_config.configs = [{
+        from = "2023-03-17";
+        store = "boltdb-shipper";
+        object_store = "filesystem";
+        schema = "v11";
+        index = {
+          prefix = "index_";
+          period = "24h";
+        };
+      }];
+      storage_config = {
+        filesystem.directory = "/var/lib/loki/chunks";
+        boltdb_shipper = {
+          active_index_directory = "/var/lib/loki/boltdb-shipper-active";
+          cache_location = "/var/lib/loki/boltdb-shipper-cache";
+          shared_store = "filesystem";
+          cache_ttl = "24h";
+        };
+      };
+      compactor = {
+        working_directory = "/var/lib/loki";
+        shared_store = "filesystem";
+        compactor_ring.kvstore.store = "inmemory";
+      };
+      limits_config = {
+        reject_old_samples = true;
+        reject_old_samples_max_age = "168h";
+      };
+      chunk_store_config.max_look_back_period = "0s";
+      table_manager = {
+        retention_deletes_enabled = false;
+        retention_period = "0s";
+      };
+    };
+  };
+  services.promtail = {
+    enable = true;
+    configuration = {
+      server = {
+        http_listen_port = 28183;
+        grpc_listen_port = 0;
+      };
+      positions.filename = "/tmp/positions.yml";
+      clients = [{
+        url = "http://127.0.0.1:${toString config.services.loki.configuration.server.http_listen_port}/loki/api/v1/push";
+      }];
+      scrape_configs = [{
+        job_name = "journal";
+        journal = {
+          max_age = "12h";
+          labels = {
+            job = "systemd-journal";
+            host = "silo";
+          };
+        };
+        relabel_configs = [{
+          source_labels = ["__journal__systemd_unit"];
+          target_label = "unit";
+        } {
+          source_labels = ["__journal_syslog_identifier"];
+          target_label = "syslog_identifier";
+        }];
+      }];
+    };
+  };
+
   services.nginx.statusPage = true;
   services.prometheus = {
     enable = true;
@@ -18,7 +109,27 @@
       nginx.enable = true;
       blackbox = {
         enable = true;
-        configFile = ./blackbox_exporter.yml;
+        configFile = builtins.toFile "blackbox_exporter.yml" (builtins.toJSON { # Some reason lib.generators.toYAML errors out :s
+          modules = {
+            http_2xx = {
+              prober = "http";
+              timeout = "15s";
+              http = {
+                fail_if_not_ssl = true;
+                ip_protocol_fallback = false;
+                method = "GET";
+                no_follow_redirects = false;
+                preferred_ip_protocol = "ip4";
+                valid_http_versions = ["HTTP/1.1" "HTTP/2.0"];
+              };
+            };
+            icmp = {
+              prober = "icmp";
+              timeout = "5s";
+              icmp.preferred_ip_protocol = "ip4";
+            };
+          };
+        });
       };
     };
     scrapeConfigs = [
@@ -107,6 +218,7 @@
   services.grafana = {
     enable = true;
     settings = {
+      server.root_url = "https://grafana.winny.tech/";
       server.http_port = 3001;
       "auth.anonymous" = {
         enabled = "true";
@@ -120,6 +232,11 @@
       url = "http://127.0.0.1:${toString config.services.prometheus.port}";
       name = "Silo Prometheus";
       type = "prometheus";
+    } {
+      url = "http://127.0.0.1:${toString config.services.loki.configuration.server.http_listen_port}";
+      type = "loki";
+      name = "Silo Loki";
+      jsonData.maxLines = 1000;
     }];
   };
 
@@ -154,5 +271,4 @@
       '';
     };
   };
-
 }
