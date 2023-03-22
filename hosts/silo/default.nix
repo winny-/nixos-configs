@@ -156,6 +156,7 @@
     package = pkgs.mariadb;
   };
 
+  hardware.opengl.enable = true;
   services.jellyfin.enable = true;
   users.users.jellyfin.extraGroups = [ "video" ];
   security.acme = {
