@@ -5,6 +5,8 @@
 
 { config, lib, ... }:
 {
+  networking.firewall.allowedTCPPorts = [ 1514 ];
+  networking.firewall.allowedUDPPorts = [ 1514 ];
   services.loki = {
     enable = true;
     configuration = {
@@ -72,6 +74,32 @@
         url = "http://127.0.0.1:${toString config.services.loki.configuration.server.http_listen_port}/loki/api/v1/push";
       }];
       scrape_configs = [{
+        job_name = "syslog";
+        syslog = {
+          listen_address = "[::]:1514";
+          listen_protocol = "tcp";
+          idle_timeout = "60s";
+          label_structured_data = true;
+          labels.job = "syslog";
+        };
+        relabel_configs = [{
+          source_labels = ["__syslog_message_hostname"];
+          target_label = "host";
+        }];
+      } {
+        job_name = "syslog-udp";
+        syslog = {
+          listen_address = "[::]:1514";
+          listen_protocol = "udp";
+          idle_timeout = "60s";
+          label_structured_data = true;
+          labels.job = "syslog";
+        };
+        relabel_configs = [{
+          source_labels = ["__syslog_message_hostname"];
+          target_label = "host";
+        }];
+      } {
         job_name = "journal";
         journal = {
           max_age = "12h";
