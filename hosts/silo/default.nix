@@ -49,6 +49,7 @@
     hostname = "pcm86lii.repo.borgbase.com";
     username = "pcm86lii";
     directories = [
+      config.services.mysqlBackup.location
       "/var/lib/nextcloud"
       "/var/lib/jellyfin"
       "/home"
@@ -138,22 +139,59 @@
     device = "naspool/backup/toybox";
     fsType = "zfs";
   };
+  systemd.services.backup = {
+    requires = ["mysql-backup.service"];
+    after = ["mysql-backup.service"];
+  };
+  services.mysqlBackup = {
+    enable = true;
+    databases = [
+      config.services.nextcloud.config.dbname
+    ];
+  };
+  systemd.services."nextcloud-setup" = {
+    requires = ["mysql.service"];
+    after = ["mysql.service"];
+  };
   services.nextcloud = {
     enable = true;
     hostName = "nc.winny.tech";
     https = true;
     package = pkgs.nextcloud25;
-    config.adminpassFile = "/secrets/nextcloud/adminpass";
+    config = {
+      adminpassFile = "/secrets/nextcloud/adminpass";
+      dbtype = "mysql";
+      dbuser = "nextcloud";
+      dbname = "nextcloud";
+    };
     enableBrokenCiphersForSSE = false;
+    extraOptions = {
+      "mysql.utf8mb4" = true;
+    };
 
     # Setup tuning recommendations from nc admin dashboard.
     phpOptions."opcache.interned_strings_buffer" = "16";
     config.defaultPhoneRegion = "US";
   };
-  # TODO migrate nextcloud sqlite to mysql.
+  # In order to migrate to mysql you first have to (based off of https://docs.nextcloud.com/server/25/admin_manual/configuration_database/db_conversion.html :
+  # 1) Set up *just* the mysql cfg below then nixos-rebuild switch
+  # 2) sudo -u nextcloud nextcloud-occ db:convert-type -n --all-apps mysql nextcloud localhost nextcloud
+  # 3) Configure the "db" entries in the above services.nextcloud.config
+  # 4) switch again
+  # 5) in the case it complain about 4 byte characters, you may need to refer to https://docs.nextcloud.com/server/latest/admin_manual/configuration_database/mysql_4byte_support.html
   services.mysql = {
     enable = true;
     package = pkgs.mariadb;
+    ensureDatabases = [ "nextcloud" ];
+    ensureUsers = [
+      { name = "nextcloud";
+        ensurePermissions."nextcloud.*" = "ALL PRIVILEGES"; }
+    ];
+    settings = {
+      mysqld = {
+        innodb_file_per_table = 1;
+      };
+    };
   };
 
   hardware.opengl.enable = true;
