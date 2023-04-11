@@ -149,15 +149,34 @@
       config.services.nextcloud.config.dbname
     ];
   };
-  systemd.services."nextcloud-setup" = {
-    requires = ["mysql.service"];
-    after = ["mysql.service"];
+  systemd.services."nextcloud-setup" = let
+    deps = [
+      "mysql.service"
+      "memcached.service"
+      "redis-nextcloud.service"
+    ];
+  in {
+    requires = deps;
+    after = deps;
   };
+  services.memcached.enable = true;
+  services.redis.servers.nextcloud = {
+    enable = true;
+    user = "nextcloud";
+    port = 0;
+  };
+  # Note to self: Set up a prometheus exporter for php-fpm.  Then use those
+  # metrics to guide any performance tuning.
   services.nextcloud = {
     enable = true;
     hostName = "nc.winny.tech";
     https = true;
     package = pkgs.nextcloud25;
+    caching = {
+      redis = true;
+      apcu = true;
+      memcached = true;
+    };
     config = {
       adminpassFile = "/secrets/nextcloud/adminpass";
       dbtype = "mysql";
@@ -167,6 +186,15 @@
     enableBrokenCiphersForSSE = false;
     extraOptions = {
       "mysql.utf8mb4" = true;
+      redis = {
+        host = config.services.redis.servers.nextcloud.unixSocket;
+        port = 0;
+        dbindex = 0;
+        timeout = 1.5;
+      };
+      "memcache.local" = "\\OC\\Memcache\\APCu";
+      "memcache.distributed" = "\\OC\\Memcache\\Redis";
+      "memcache.locking" = "\\OC\\Memcache\\Redis";
     };
 
     # Setup tuning recommendations from nc admin dashboard.
