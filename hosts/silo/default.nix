@@ -26,6 +26,11 @@
 
   '';
 
+  services.iperf3 = {
+    enable = true;
+    openFirewall = true;
+  };
+
   # services.openssh.extraConfig = ''
   #   Match User backup-toybox
   #     ChrootDirectory /backup/toybox
