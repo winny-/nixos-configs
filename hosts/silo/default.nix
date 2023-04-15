@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, unstable, ... }:
 {
   imports = [
     ./grafana.nix
@@ -223,7 +223,10 @@
   };
 
   hardware.opengl.enable = true;
-  services.jellyfin.enable = true;
+  services.jellyfin = {
+    enable = true;
+    package = unstable.jellyfin;
+  };
   users.users.jellyfin.extraGroups = [ "video" ];
   security.acme = {
     acceptTerms = true;
