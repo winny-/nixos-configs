@@ -164,6 +164,7 @@
       {
         job_name = "silo";
         static_configs = [{
+          labels.host = "silo";
           targets = [
             "127.0.0.1:${toString config.services.prometheus.exporters.node.port}"
             "127.0.0.1:${toString config.services.prometheus.exporters.zfs.port}"
@@ -178,12 +179,14 @@
         job_name = "toybox";
         static_configs = [{
           targets = [ "toybox.home.winny.tech:9182" ];
+          labels.host = "toybox";
         }];
       }
       {
         job_name = "styx";
         static_configs = [{
           targets = [ "styx.home.winny.tech:9100" ];
+          labels.host = "styx";
         }];
       }
       {
@@ -249,7 +252,7 @@
       server.root_url = "https://grafana.winny.tech/";
       server.http_port = 3001;
       "auth.anonymous" = {
-        enabled = "true";
+        enabled = "false";
         org_name = "winny.tech";
         org_role = "Viewer";
         hide_version = "true";
