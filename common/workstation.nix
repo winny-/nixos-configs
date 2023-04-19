@@ -260,6 +260,7 @@ with lib;
     zeal
     ledger
     xournal
+    xdragon  # Drag n drop
     v4l-utils
     emote  # Emoji selector
 
