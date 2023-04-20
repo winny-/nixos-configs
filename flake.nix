@@ -19,7 +19,7 @@
                   (./. + "/hosts/${hostName}")
                   ({ ... }: {
                     nix.registry.nixpkgs.flake = nixpkgs;
-                    nix.nixPath = ["nixpkgs=flake:nixpkgs"];
+                    nix.nixPath = ["nixpkgs=${nixpkgs}"];
                   })
                 ];
                 specialArgs = { inherit inputs; inherit unstable; };
@@ -32,7 +32,7 @@
                         ./livecd/minimal
                     ({ ... }: {
                       nix.registry.nixpkgs.flake = nixpkgs;
-                      nix.nixPath = ["nixpkgs=flake:nixpkgs"];
+                      nix.nixPath = ["nixpkgs=${nixpkgs}"];
                     })
                   ];
                   specialArgs = { inherit inputs; inherit unstable; };
