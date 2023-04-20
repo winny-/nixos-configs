@@ -230,6 +230,8 @@
             "printer.home.winny.tech"
             "wifi.home.winny.tech"
             "ircbox.winny.tech"
+            "2606:4700::1111"
+            "1.1.1.1"
           ];
         }];
         relabel_configs = [{
