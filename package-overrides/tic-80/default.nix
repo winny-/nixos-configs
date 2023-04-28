@@ -1,9 +1,7 @@
-# See https://github.com/NixOS/nixpkgs/pull/177254
-
 { lib, pkgs, stdenv, fetchgit, libGL, alsa-lib, libX11, xorgproto, libICE, libXi
 , libXScrnSaver, libXcursor, libXinerama, libXext, libXxf86vm, libXrandr
 , libxkbcommon, wayland, wayland-protocols, wayland-scanner, dbus, udev
-, libdecor, pipewire, libpulseaudio, libiconv, ... }:
+, libdecor, pipewire, libpulseaudio, libiconv, withPro ? false, ... }:
 with pkgs;
 stdenv.mkDerivation rec {
   pname = "tic-80";
@@ -16,6 +14,7 @@ stdenv.mkDerivation rec {
     fetchSubmodules = true;
   };
 
+  cmakeFlags = if withPro then [ "-DBUILD_PRO=On" ] else [];
   enableParallelBuilding = true;
   dontStrip = true;
   buildInputs = [ cmake pkg-config wayland-protocols ] ++ dlopenBuildInputs;

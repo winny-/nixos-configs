@@ -98,4 +98,5 @@
     calendar = [ "*-*-* 17:00:00" ];
   };
 
+  environment.systemPackages = with pkgs; [ (tic-80.override { withPro = true; }) ];
 }
