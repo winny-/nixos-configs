@@ -1,12 +1,9 @@
 # See https://github.com/NixOS/nixpkgs/pull/177254
 
-{
-  lib,
-  pkgs,
-  stdenv,
-  fetchgit,
-  ...
-}:
+{ lib, pkgs, stdenv, fetchgit, libGL, alsa-lib, libX11, xorgproto, libICE, libXi
+, libXScrnSaver, libXcursor, libXinerama, libXext, libXxf86vm, libXrandr
+, libxkbcommon, wayland, wayland-protocols, wayland-scanner, dbus, udev
+, libdecor, pipewire, libpulseaudio, libiconv, ... }:
 with pkgs;
 stdenv.mkDerivation rec {
   pname = "tic-80";
@@ -21,7 +18,31 @@ stdenv.mkDerivation rec {
 
   enableParallelBuilding = true;
   dontStrip = true;
-  nativeBuildInputs = [ cmake pkg-config ];
+  buildInputs = [ cmake pkg-config wayland-protocols ] ++ dlopenBuildInputs;
+  dlopenBuildInputs = [
+    libGL
+    alsa-lib
+    libX11
+    libICE
+    libXi
+    libXScrnSaver
+    libXcursor
+    libXinerama
+    libXext
+    libXxf86vm
+    libXrandr
+    wayland
+    libxkbcommon
+    wayland-scanner
+    dbus
+    udev
+    libdecor
+    pipewire
+    libpulseaudio
+  ];
+  dlopenPropagatedBuildInputs = [ libGL libX11 ];
+  propagatedBuildInputs = [ xorgproto ] ++ dlopenPropagatedBuildInputs;
+  # buildInputs = [ libiconv ] ++ dlopenBuildInputs;
   # nativeBuildInputs = [  ];
   # propagatedBuildInputs = [ ];
   # buildInputs = [  ];
@@ -29,8 +50,29 @@ stdenv.mkDerivation rec {
   # installPhase = ''
   # '';
 
+  # SDL is weird in that instead of just dynamically linking with
+  # libraries when you `--enable-*` (or when `configure` finds) them
+  # it `dlopen`s them at runtime. In principle, this means it can
+  # ignore any missing optional dependencies like alsa, pulseaudio,
+  # some x11 libs, wayland, etc if they are missing on the system
+  # and/or work with wide array of versions of said libraries. In
+  # nixpkgs, however, we don't need any of that. Moreover, since we
+  # don't have a global ld-cache we have to stuff all the propagated
+  # libraries into rpath by hand or else some applications that use
+  # SDL API that requires said libraries will fail to start.
+  #
+  # You can grep SDL sources with `grep -rE 'SDL_(NAME|.*_SYM)'` to
+  # list the symbols used in this way.
+  postFixup = let
+    rpath =
+      lib.makeLibraryPath (dlopenPropagatedBuildInputs ++ dlopenBuildInputs);
+  in ''
+    patchelf --set-rpath "$(patchelf --print-rpath $out/bin/tic80):${rpath}" "$out/bin/tic80"
+  '';
+
   meta = with lib; {
-    description = "A free and open source fantasy computer for making, playing and sharing tiny games";
+    description =
+      "A free and open source fantasy computer for making, playing and sharing tiny games";
     longDescription = ''
       TIC-80 is a free and open source fantasy computer for making, playing and
       sharing tiny games.
