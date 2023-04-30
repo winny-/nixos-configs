@@ -14,12 +14,14 @@ stdenv.mkDerivation rec {
     fetchSubmodules = true;
   };
 
-  cmakeFlags = if withPro then [ "-DBUILD_PRO=On" ] else [];
+  cmakeFlags = (if withPro then [ "-DBUILD_PRO=On" ] else [])
+               ++ ["-DBUILD_SDLGPU=On"];
   enableParallelBuilding = true;
   dontStrip = true;
-  buildInputs = [ cmake pkg-config wayland-protocols ] ++ dlopenBuildInputs;
+  buildInputs = [ cmake git pkg-config wayland-protocols ] ++ dlopenBuildInputs;
   dlopenBuildInputs = [
     libGL
+    libGLU
     alsa-lib
     libX11
     libICE
@@ -86,10 +88,6 @@ stdenv.mkDerivation rec {
       whole process of creation takes place under some technical limitations:
       240x136 pixels display, 16 color palette, 256 8x8 color sprites, 4
       channel sound and etc.
-
-      Hardware Probe Tool is a tool to probe for hardware, check it's
-      operability and find drivers. The probes are uploaded to the Linux
-      hardware database. See https://linux-hardware.org for more information.
     '';
     homepage = "https://github.com/nesbox/TIC-80/";
     license = licenses.mit;
