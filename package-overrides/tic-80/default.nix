@@ -3,9 +3,13 @@
 , libxkbcommon, wayland, wayland-protocols, wayland-scanner, dbus, udev
 , libdecor, pipewire, libpulseaudio, libiconv, withPro ? false, ... }:
 with pkgs;
-stdenv.mkDerivation rec {
+let
+  major = "1";
+  minor = "0";
+  revision = "2164";
+in stdenv.mkDerivation rec {
   pname = "tic-80";
-  version = "1.0.2164";
+  version = "${major}.${minor}.${revision}";
 
   src = fetchgit {
     url = "https://github.com/nesbox/TIC-80";
@@ -14,11 +18,23 @@ stdenv.mkDerivation rec {
     fetchSubmodules = true;
   };
 
+  # TIC-80's version detection depends on the git checkout remaining intact
+  # verbatim.  It appears fetchgit does weird things, even with leaveDotGit =
+  # true (which implies deepClone).  Here we take a different approach and
+  # hardcode the version in CMakeLists.txt.
+  postUnpack = ''
+    sed -E -i"" \
+        -e 's|VERSION_MAJOR [^)]+|VERSION_MAJOR ${major}|' \
+        -e 's|VERSION_MINOR [^)]+|VERSION_MINOR ${minor}|' \
+        -e 's|VERSION_REVISION [^)]+|VERSION_REVISION ${revision}|' \
+        TIC-80/CMakeLists.txt
+  '';
+
   cmakeFlags = (if withPro then [ "-DBUILD_PRO=On" ] else [])
                ++ ["-DBUILD_SDLGPU=On"];
   enableParallelBuilding = true;
   dontStrip = true;
-  buildInputs = [ cmake git pkg-config wayland-protocols ] ++ dlopenBuildInputs;
+  buildInputs = [ cmake pkg-config wayland-protocols ] ++ dlopenBuildInputs;
   dlopenBuildInputs = [
     libGL
     libGLU
