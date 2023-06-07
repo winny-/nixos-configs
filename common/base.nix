@@ -10,6 +10,8 @@ with lib; {
     ./emacs.nix
   ];
 
+  zramSwap.enable = mkDefault true;
+
   hardware.enableAllFirmware = true;
   services.earlyoom.enable = mkDefault true;
 

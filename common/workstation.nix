@@ -40,13 +40,17 @@ with lib;
     ];
   };
 
+  services.power-profiles-daemon.enable = true;
+  services.tlp.enable = false;
+
   services.xserver = {
     enable = true;
+    desktopManager.plasma5.enable = true;
     displayManager = {
-      defaultSession = mkDefault "xfce";
-      lightdm.enable = true;
+      defaultSession = mkForce "plasmawayland";
+      sddm.enable = true;
       startx.enable = true;
-      autoLogin.user = "winston";
+      # autoLogin.user = "winston";
     };
     desktopManager = {
       gnome.enable = mkDefault false;
@@ -129,19 +133,31 @@ with lib;
   #   jack.enable = true;
   # };
 
-  # Enable pulseaudio.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.extraConfig = ''
+  # # Enable pulseaudio.
+  # sound.enable = true;
+  # hardware.pulseaudio.enable = true;
+  # hardware.pulseaudio.extraConfig = ''
 
-    ################################################################
-    # from workstation.nix
-    ################################################################
+  #   ################################################################
+  #   # from workstation.nix
+  #   ################################################################
 
-    # Disable annoying audio click in/out when playback is paused temporarily.
-    unload-module module-suspend-on-idle
-  '';
+  #   # Disable annoying audio click in/out when playback is paused temporarily.
+  #   unload-module module-suspend-on-idle
+  # '';
+
   hardware.bluetooth.enable = true;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    jack.enable = true;
+  };
+  boot.plymouth.enable = true;
+
 
   # Theming
   qt5.platformTheme = mkDefault "gtk";
@@ -303,6 +319,8 @@ with lib;
     unrar
     unzip
     koreader
+
+    wl-clipboard
   ];
 
   # This value determines the NixOS release from which the default
