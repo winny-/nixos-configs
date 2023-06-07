@@ -55,7 +55,7 @@ with lib;
     desktopManager = {
       gnome.enable = mkDefault false;
       pantheon.enable = mkDefault false;
-      xfce.enable = mkDefault true;
+      xfce.enable = mkDefault false;
     };
     layout = "us";
     xkbVariant = "dvorak";
@@ -252,7 +252,6 @@ with lib;
     xorg.xeyes
     xorg.xclock
     xfce.xfce4-terminal
-    xfce.xfce4-whiskermenu-plugin
     theme-vertex
     gnome.adwaita-icon-theme  # Cursor
     libnotify  # notify-send
@@ -321,6 +320,7 @@ with lib;
     koreader
 
     wl-clipboard
+    alacritty
   ];
 
   # This value determines the NixOS release from which the default
