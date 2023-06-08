@@ -286,7 +286,6 @@ with lib;
     python3
     virtualenv
     postgresql
-    pre-commit
     heroku
     vultr-cli
     flyctl

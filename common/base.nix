@@ -111,7 +111,8 @@ with lib; {
 
     sqlite-interactive
 
-    pre-commit
+    # https://github.com/NixOS/nixpkgs/issues/173707 pygrep support
+    (python3.withPackages (_: [ pre-commit ]))
 
     git
     git-ignore
