@@ -2,9 +2,9 @@
   description = "Winny's NixOS Configurations";
   inputs = {
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:NixOS/nixpkgs/release-22.11";
-    jhmod.url = "github:sector-f/jhmod/7fad6e157d27b931763da9ebdc2c23f4c4270085";
-    flake-utils.url = "github:numtide/flake-utils/6ee9ebb6b1ee695d2cacc4faa053a7b9baa76817";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-23.05";
+    jhmod.url = "github:sector-f/jhmod/c8b5242ae5b716d55ba0d5f30fdc0ea7e0583372";
+    flake-utils.url = "github:numtide/flake-utils/a1720a10a6cfe8234c0e93907ffe81be440f4cef";
   };
 
   outputs = { self, nixpkgs, jhmod, flake-utils, ... }@inputs:

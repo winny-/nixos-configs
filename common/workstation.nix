@@ -160,7 +160,7 @@ with lib;
 
 
   # Theming
-  qt5.platformTheme = mkDefault "gtk";
+  qt.platformTheme = mkDefault "gtk";
   environment.etc."xdg/gtk-2.0/gtkrc".text = ''
     gtk-theme-name="Vertex-Dark"
     gtk-icon-theme-name="HighContrast"

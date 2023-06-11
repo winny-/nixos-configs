@@ -52,8 +52,10 @@ with lib; {
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
-    passwordAuthentication = false;
-    forwardX11 = true;
+    settings = {
+      PasswordAuthentication = false;
+      X11Forwarding = true;
+    };
     hostKeys = [
       {
         bits = 4096;
