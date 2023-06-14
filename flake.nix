@@ -5,6 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/release-23.05";
     jhmod.url = "github:sector-f/jhmod/c8b5242ae5b716d55ba0d5f30fdc0ea7e0583372";
     flake-utils.url = "github:numtide/flake-utils/a1720a10a6cfe8234c0e93907ffe81be440f4cef";
+    dgltool.url = "github:winny-/dgltool";
   };
 
   outputs = { self, nixpkgs, jhmod, flake-utils, ... }@inputs:
