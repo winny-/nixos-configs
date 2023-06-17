@@ -6,11 +6,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1686729646,
-        "narHash": "sha256-BMXM9ruoWt3lETFe8eHESsCOqs+mJ8zCWkgg9mtBozk=",
+        "lastModified": 1686797700,
+        "narHash": "sha256-fSznt9Z4cDHRJQU+7Mhdb9uZh0G5d3GlCTu4CwAppWU=",
         "owner": "winny-",
         "repo": "dgltool",
-        "rev": "2a7553e695b8341043ff703903a7e234fed9e710",
+        "rev": "9ad6cd6599eabb079c5b5e3f4af35db8e0818fc8",
         "type": "github"
       },
       "original": {
