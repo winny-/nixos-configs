@@ -59,34 +59,19 @@
   fileSystems."/games" = {
     device = "/dev/Green/games";
     fsType = "ext4";
+    options = ["nofail"];
   };
 
   fileSystems."/stuff" = {
     device = "/dev/Green/main";
     fsType = "ext4";
+    options = ["nofail"];
   };
 
   fileSystems."/vm" = {
     device = "/dev/Green/VM";
     fsType = "ext4";
-  };
-
-  fileSystems."/gentoo" = {
-    device = "/dev/Green/Gentoo_Root";
-    fsType = "ext4";
-    options = [ "ro" ];
-  };
-
-  fileSystems."/gentoo/home" = {
-    device = "/dev/Green/Gentoo_Home";
-    fsType = "ext4";
-    options = [ "ro" ];
-  };
-
-  fileSystems."/gentoo/boot" = {
-    device = "/dev/Green/Gentoo_Boot";
-    fsType = "vfat";
-    options = [ "ro" ];
+    options = ["nofail"];
   };
 
   # my.libvirtd.interfaces.primary = "enp39s0";
