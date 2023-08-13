@@ -16,5 +16,6 @@
       services.zfs.trim.enable = cfg.enable;
       services.zfs.autoScrub.enable = cfg.enable;
       boot.supportedFilesystems = if cfg.enable then [ "zfs" ] else [];
+      boot.plymouth.enable = mkForce false;
     };
 }
