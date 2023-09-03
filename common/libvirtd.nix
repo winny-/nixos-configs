@@ -23,20 +23,13 @@ with lib; {
         libvirtdeth0.interfaces = [ config.my.libvirtd.interfaces.primary ];
       })];
 
-    # https://github.com/NixOS/nixpkgs/issues/113172
     # You'll also need to add something like the following to your domain's XML
     # as a child element of the <filesystem> element:
     #
     # <binary path='/run/current-system/sw/bin/virtiofsd' xattr='on'></binary>
     #
-    environment.systemPackages = [
-      (pkgs.stdenv.mkDerivation {
-        name = "virtiofsd-link";
-        buildCommand = ''
-          mkdir -p $out/bin
-          ln -s ${pkgs.qemu}/libexec/virtiofsd $out/bin/
-        '';
-      })
+    environment.systemPackages = with pkgs; [
+      virtiofsd
     ];
 
     # Direct users to the system local instance instead of the user session
