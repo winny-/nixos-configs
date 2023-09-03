@@ -242,8 +242,20 @@
     enable = true;
     port = 60717;
   };
+  services.searx = {
+    enable = true;
+    settings.server = {
+      secret_key = builtins.readFile "/secrets/searx/secret_key";
+      bind_address = "127.0.0.1";
+      port = 3050;
+    };
+  };
   services.nginx = {
     enable = true;
+    appendHttpConfig = ''
+      error_log syslog:server=unix:/dev/log;
+      access_log syslog:server=unix:/dev/log;
+    '';
     virtualHosts = let
       siloWithSSL = useSSL: {
         forceSSL = useSSL;
@@ -280,6 +292,12 @@
         extraConfig = ''
           return 302 https://silo.winny.tech/;
         '';
+      };
+      "searx.winny.tech" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = proxyPass "http://localhost:${toString config.services.searx.settings.server.port}";
+        basicAuth.searx = builtins.readFile "/secrets/searx/basic_auth";
       };
       "jellyfin.winny.tech" = {
         forceSSL = true;
