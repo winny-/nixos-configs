@@ -250,6 +250,17 @@
       port = 3050;
     };
   };
+
+  services.jitsi-meet = {
+    enable = true;
+    nginx.enable = true;
+    hostName = "meet.winny.tech";
+  };
+  services.jitsi-videobridge = {
+    enable = true;
+    openFirewall = true;
+  };
+
   services.nginx = {
     enable = true;
     appendHttpConfig = ''
