@@ -176,7 +176,7 @@
     enable = true;
     hostName = "nc.winny.tech";
     https = true;
-    package = pkgs.nextcloud25;
+    package = pkgs.nextcloud27;
     caching = {
       redis = true;
       apcu = true;
