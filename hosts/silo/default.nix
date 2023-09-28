@@ -8,6 +8,7 @@
     ../../common/libvirtd.nix
     ../../common/netdata.nix
     ../../common/borgmatic.nix
+    ../../common/syncthing.nix
     ../../common/base.nix
   ];
 
