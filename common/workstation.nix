@@ -228,6 +228,7 @@ with lib;
     deadbeef-with-plugins
     pavucontrol
     obs-studio
+    audacity
     kdenlive
     kazam
     ffmpeg
