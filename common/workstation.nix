@@ -158,6 +158,13 @@ with lib;
   };
   boot.plymouth.enable = true;
 
+  # Skrooge and others are not packaged in nixpkgs.  Let's get cracking with
+  # using these tools.  Package later.
+  services.flatpak.enable = true;
+
+  programs.dconf.enable = true;  # GNU Cash is fun to watch break in new and
+                                 # unique ways when dcond isn't available,
+                                 # without informing the user about it.
 
   # Theming
   qt.platformTheme = mkDefault "gtk";
@@ -185,6 +192,8 @@ with lib;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    gnucash
+
     # HTTP clients
     qutebrowser
     tor-browser-bundle-bin
