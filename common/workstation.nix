@@ -17,6 +17,7 @@ with lib;
     ./portal
     ./vaapi.nix
     ./netdata.nix
+    ./sanity.nix
   ];
 
   fileSystems."/backup" = {

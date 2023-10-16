@@ -74,6 +74,8 @@
     options = ["nofail"];
   };
 
+  virtualisation.spiceUSBRedirection.enable = true;
+
   # my.libvirtd.interfaces.primary = "enp39s0";
 
   # This value determines the NixOS release from which the default
