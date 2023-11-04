@@ -6,6 +6,7 @@
     steam
     xonotic
     gzdoom
+    yquake2
     inputs.jhmod.packages.x86_64-linux.jhmod
   ];
 }

@@ -52,28 +52,6 @@
 
   services.openssh.ports = [ 22 9999 ];
 
-  environment.etc.crypttab.text = ''
-    greenCrypt UUID=704eca58-8f57-4f53-989e-56511d731366 /secrets/green.key luks
-  '';
-
-  fileSystems."/games" = {
-    device = "/dev/Green/games";
-    fsType = "ext4";
-    options = ["nofail"];
-  };
-
-  fileSystems."/stuff" = {
-    device = "/dev/Green/main";
-    fsType = "ext4";
-    options = ["nofail"];
-  };
-
-  fileSystems."/vm" = {
-    device = "/dev/Green/VM";
-    fsType = "ext4";
-    options = ["nofail"];
-  };
-
   virtualisation.spiceUSBRedirection.enable = true;
 
   # my.libvirtd.interfaces.primary = "enp39s0";

@@ -118,34 +118,9 @@ with lib;
       '';
   };
 
+  programs.sway.enable = true;
+
   services.ddccontrol.enable = true;
-
-  # Enable pipewire.
-  #
-  # Presently disabled because it intermittently stops playing sound on my
-  # laptop.
-  #
-  # security.rtkit.enable = true;
-  # services.pipewire = {
-  #   enable = true;
-  #   alsa.enable = true;
-  #   alsa.support32Bit = true;
-  #   pulse.enable = true;
-  #   jack.enable = true;
-  # };
-
-  # # Enable pulseaudio.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
-  # hardware.pulseaudio.extraConfig = ''
-
-  #   ################################################################
-  #   # from workstation.nix
-  #   ################################################################
-
-  #   # Disable annoying audio click in/out when playback is paused temporarily.
-  #   unload-module module-suspend-on-idle
-  # '';
 
   hardware.bluetooth.enable = true;
   security.rtkit.enable = true;
