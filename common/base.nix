@@ -10,7 +10,11 @@ with lib; {
     ./emacs.nix
   ];
 
-  zramSwap.enable = mkDefault true;
+  zramSwap = {
+    enable = mkDefault true;
+    memoryPercent = mkDefault 20;
+    algorithm = mkDefault "lz4";
+  };
 
   hardware.enableAllFirmware = true;
   services.earlyoom.enable = mkDefault true;
