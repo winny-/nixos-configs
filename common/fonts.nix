@@ -5,9 +5,9 @@
     enableDefaultFonts = true;
     fontconfig = {
       defaultFonts = {
-        serif = [ "Liberation Serif" ];
+        serif = [ "Noto Serif" ];
         monospace = [ "mononoki" ];
-        sansSerif = [ "Droid Sans" ];
+        sansSerif = [ "Noto Sans" ];
       };
     };
     fonts = with pkgs; [

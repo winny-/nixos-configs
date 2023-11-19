@@ -170,24 +170,14 @@ with lib;
   environment.systemPackages = with pkgs; [
     gnucash
 
-    # HTTP clients
-    qutebrowser
     tor-browser-bundle-bin
     firefox
 
-    sacc
-
     # Correspondence
     thunderbird
-    neomutt
     signal-desktop
     weechat
     (pkgs.mumble.override { pulseSupport = true; })  # See https://nixos.wiki/wiki/Mumble
-
-    # PIM
-    vdirsyncer
-    khal
-    khard
 
     # Publishing/document preparation
     libreoffice-fresh
@@ -209,16 +199,12 @@ with lib;
     openvpn
 
     spaceFM  # OFM
-    nsxiv  # Hopefully better than Ristretto.
-    deadbeef-with-plugins
     pavucontrol
     obs-studio
     audacity
     kdenlive
     kazam
     ffmpeg
-    ffcast  # rofi-screenshot
-    xorg.xwininfo # rofi-screenshot
     (mpv.override { scripts = with mpvScripts; [ mpris ]; })
     playerctl
     mediainfo
@@ -227,40 +213,14 @@ with lib;
     i3
     i3status
     i3lock
-    urlview
-    xdotool
-    xsel
-    xclip
     glxinfo
-    xorg.xkill
-    xorg.xdpyinfo
-    xorg.listres
-    xorg.xeyes
-    xorg.xclock
-    xfce.xfce4-terminal
     theme-vertex
     gnome.adwaita-icon-theme  # Cursor
     libnotify  # notify-send
-    rofi
-    xbindkeys
-    dunst
     pass
-    rofi-pass
-    redshift
-    ponymix
-    mpvc
-    maim
-    slop
-    arandr
-    wmctrl
-    picom
-    wmname
-    xbanish
-    xkbset
     acpilight
     zeal
     ledger
-    xournal
     xdragon  # Drag n drop
     v4l-utils
     emote  # Emoji selector
@@ -273,23 +233,16 @@ with lib;
     virtualenv
     postgresql
     heroku
-    vultr-cli
     flyctl
     nodejs
-    ghc
-    ocaml
-    sbcl
 
     glab
     gh
 
     virt-manager
 
-    ghidra
-
     # Utilities
     gparted
-    latencytop
 
     # Backup
     borgmatic
@@ -306,6 +259,8 @@ with lib;
 
     wl-clipboard
     alacritty
+    tessen  # rofi-pass replacement that works on wayland and X11.
+    nextcloud-client
   ];
 
   # This value determines the NixOS release from which the default

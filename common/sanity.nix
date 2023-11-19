@@ -9,5 +9,7 @@
     127.0.0.2 picknsave.com  # Undesirable company, avoid.
     127.0.0.2 news.ycombinator.com  # Time waster, no benefit of using my time
                                     # reading this content.
+    127.0.0.2 quora.com # Low quality QA site - time investment is not worth #
+                        # it.
   '';
 }
