@@ -95,7 +95,7 @@ with lib; {
 
   environment.systemPackages = with pkgs; [
     tmux
-    screen  # Serial terminals
+    picocom
 
     # Replace busybox stuff.
     coreutils  # Avoid busybox rm and gain more features.
@@ -164,6 +164,7 @@ with lib; {
     sysstat
     dstat
     stress-ng
+    fio
     nmap
     rsync
     lsof

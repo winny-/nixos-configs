@@ -195,10 +195,10 @@ with lib;
     inkscape
     gimp
     imagemagick
+    krita
 
     openvpn
 
-    spaceFM  # OFM
     pavucontrol
     obs-studio
     audacity
@@ -209,10 +209,6 @@ with lib;
     playerctl
     mediainfo
     zathura
-    awesome
-    i3
-    i3status
-    i3lock
     glxinfo
     theme-vertex
     gnome.adwaita-icon-theme  # Cursor
@@ -220,7 +216,6 @@ with lib;
     pass
     acpilight
     zeal
-    ledger
     xdragon  # Drag n drop
     v4l-utils
     emote  # Emoji selector
@@ -249,7 +244,6 @@ with lib;
     borgbackup
 
     # Remote login
-    drawterm
     remmina
     unison
 
