@@ -161,9 +161,9 @@ with lib;
   # https://nixos.wiki/wiki/Firefox#Tips_2 (touchscreen support)
   environment.sessionVariables.MOZ_USE_XINPUT2 = "1";
 
-  my.emacs-package = lib.mkDefault (pkgs.emacsWithPackages
-      (with pkgs.emacsPackages;
-        [ vterm ]));
+  my.emacs-package = with pkgs; ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (
+      epkgs: [ epkgs.vterm ]
+    ));
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
