@@ -42,6 +42,24 @@
     excludes = ["/root/.cache" "/home/*/.cache" "*/steamapps"];
   };
   my.zfs.enable = true;
+  services.zfs.autoSnapshot = {
+    daily = 7;
+    monthly = 0;
+    weekly = 0;
+    hourly = 7 * 4;  # One Week.
+    frequent = 8;
+  };
+  fileSystems."/games" = {
+    device = "junkpool/games";
+    fsType = "zfs";
+    options = [ "nofail" ];
+  };
+  fileSystems."/recordings" = {
+    device = "junkpool/recordings";
+    fsType = "zfs";
+    options = [ "nofail" ];
+  };
+  powerManagement.cpuFreqGovernor = "schedutil";
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
