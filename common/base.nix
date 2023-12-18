@@ -113,6 +113,7 @@ with lib; {
     ed
     vim
     config.my.emacs-package
+    (aspellWithDicts (dicts: with dicts; [ en en-computers en-science ]))
     ispell  # Emacs needs this for flyspell.
 
     sqlite-interactive
