@@ -168,6 +168,9 @@ with lib;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    jetbrains.idea-community
+    xournalpp
+
     gnucash
 
     tor-browser-bundle-bin
