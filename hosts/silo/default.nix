@@ -189,7 +189,6 @@
       dbuser = "nextcloud";
       dbname = "nextcloud";
     };
-    enableBrokenCiphersForSSE = false;
     extraOptions = {
       "mysql.utf8mb4" = true;
       redis = {
